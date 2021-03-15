@@ -5,7 +5,7 @@ import br.com.kanasha.chess.models.NormalGameChessBoard
 import br.com.kanasha.chess.models.piece.ColorEnum
 import br.com.kanasha.chess.models.piece.Pawn
 import br.com.kanasha.chess.models.piece.Queen
-import br.com.kanasha.chess.service.DiscoverAllowedMovementsService
+import br.com.kanasha.chess.engine.ProcessNormalChessBoardEngine
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -17,7 +17,7 @@ class QueenMovementTest {
         board.squares[2][0].piece = Queen(ColorEnum.WHITE, "c1")
         val piece = board.squares[2][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.isEmpty())
@@ -29,7 +29,7 @@ class QueenMovementTest {
         board.squares[2][0].piece = Queen(ColorEnum.WHITE, "c1")
         val piece = board.squares[2][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -44,7 +44,7 @@ class QueenMovementTest {
         board.squares[5][3].piece = Pawn(ColorEnum.BLACK, "f4")
         val piece = board.squares[2][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -60,7 +60,7 @@ class QueenMovementTest {
         board.squares[0][2].piece = Pawn(ColorEnum.BLACK, "a3")
         val piece = board.squares[2][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -75,7 +75,7 @@ class QueenMovementTest {
         board.squares[5][3].piece = Pawn(ColorEnum.WHITE, "f4")
         val piece = board.squares[2][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -91,7 +91,7 @@ class QueenMovementTest {
         board.squares[1][1].piece = Pawn(ColorEnum.WHITE, "Q2")
         val piece = board.squares[2][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -106,7 +106,7 @@ class QueenMovementTest {
         board.squares[0][0].piece = Queen(ColorEnum.WHITE, "a1")
         val piece = board.squares[0][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.isEmpty())
@@ -118,7 +118,7 @@ class QueenMovementTest {
         board.squares[0][0].piece = Queen(ColorEnum.WHITE, "a1")
         val piece = board.squares[0][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -133,7 +133,7 @@ class QueenMovementTest {
         board.squares[5][0].piece = Pawn(ColorEnum.BLACK, "f1")
         val piece = board.squares[0][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -148,7 +148,7 @@ class QueenMovementTest {
         board.squares[0][5].piece = Pawn(ColorEnum.BLACK, "a6")
         val piece = board.squares[0][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -164,7 +164,7 @@ class QueenMovementTest {
         board.squares[5][0].piece = Pawn(ColorEnum.BLACK, "f1")
         val piece = board.squares[0][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -180,7 +180,7 @@ class QueenMovementTest {
         board.squares[5][0].piece = Pawn(ColorEnum.WHITE, "f1")
         val piece = board.squares[0][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -196,7 +196,7 @@ class QueenMovementTest {
         board.squares[5][0].piece = Pawn(ColorEnum.BLACK, "f1")
         val piece = board.squares[0][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(

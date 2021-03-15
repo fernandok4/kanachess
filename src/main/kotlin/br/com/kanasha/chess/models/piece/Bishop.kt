@@ -12,4 +12,8 @@ class Bishop(override val color: ColorEnum,
     override val pieceMovementTypes: List<IPieceMovement> = listOf(BishopMovement(this))
 
     override val cdPiece: String = "B"
+    override var isFirstMove: Boolean = true
+    override var isUnderProtection: Boolean = false
+    override var isUnderAttack: Boolean = false
+    override var isDead: Boolean = false
 }

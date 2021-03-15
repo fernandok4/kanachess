@@ -9,12 +9,12 @@ class PawnMovement(private val piece: Pawn): IPieceMovement {
     override fun calculateAllowedCoordinates(board: Board): List<Pair<Int, Int>> {
         val possibleCoordinates = mutableListOf<Pair<Int, Int>>()
         val currentCoordinate = piece.getCoordenate()
-        val isAvailableSquare = possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first, currentCoordinate.second + 1))
+        val isAvailableSquare = possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first, currentCoordinate.second + (1 * piece.color.factorSide)))
         if(piece.isFirstMove && isAvailableSquare){
-            possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first, currentCoordinate.second + 2))
+            possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first, currentCoordinate.second + (2 * piece.color.factorSide)))
         }
-        possibleCoordinates.addAttackSquare(board, Pair(currentCoordinate.first + 1, currentCoordinate.second + 1))
-        possibleCoordinates.addAttackSquare(board, Pair(currentCoordinate.first - 1, currentCoordinate.second + 1))
+        possibleCoordinates.addAttackSquare(board, Pair(currentCoordinate.first + (1 * piece.color.factorSide), currentCoordinate.second + (1 * piece.color.factorSide)))
+        possibleCoordinates.addAttackSquare(board, Pair(currentCoordinate.first - (1 * piece.color.factorSide), currentCoordinate.second + (1 * piece.color.factorSide)))
         return possibleCoordinates
     }
 
@@ -33,9 +33,19 @@ class PawnMovement(private val piece: Pawn): IPieceMovement {
         if(!coordinate.isOnBoard()){
             return false
         }
-        val squarePiece = board.getSquarePiece(coordinate.first, coordinate.second)
-        if(this.contains(coordinate) || squarePiece == null || squarePiece.color == piece.color){
+        val square = board.getSquare(coordinate.first, coordinate.second)
+        val squarePiece = square.piece
+        if(board.colorRound != piece.color){
+            square.isUnderEnemyAttack = true
+        }
+        if(this.contains(coordinate) || squarePiece == null){
             return false
+        }
+        if(squarePiece.color == piece.color){
+            piece.protect(squarePiece)
+            return false
+        } else {
+            piece.attack(squarePiece)
         }
         return this.add(coordinate)
     }

@@ -9,7 +9,11 @@ class Knight(override val color: ColorEnum,
 
     override var allowedMoves: List<SquareCoordanate> = listOf()
     override var allowedCoordinates: List<Pair<Int, Int>> = listOf()
-    override val pieceMovementTypes: List<IPieceMovement> = listOf(KnightMovement())
+    override val pieceMovementTypes: List<IPieceMovement> = listOf(KnightMovement(this))
 
     override val cdPiece: String = "N"
+    override var isFirstMove: Boolean = true
+    override var isUnderProtection: Boolean = false
+    override var isUnderAttack: Boolean = false
+    override var isDead: Boolean = false
 }

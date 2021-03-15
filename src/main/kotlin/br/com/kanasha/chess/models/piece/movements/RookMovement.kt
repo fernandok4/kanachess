@@ -25,9 +25,21 @@ class RookMovement(private val piece: IPiece): IPieceMovement {
             this.addAvailableSquare(board, Pair(coordinate.first + xSquares, coordinate.second + ySquares), xSquares, ySquares)
             return
         }
-        val squarePiece = board.getSquarePiece(coordinate.first, coordinate.second)
-        if(this.contains(coordinate) || squarePiece?.color == piece.color){
+        val square = board.getSquare(coordinate.first, coordinate.second)
+        val squarePiece = square.piece
+        if(board.colorRound != piece.color){
+            square.isUnderEnemyAttack = true
+        }
+        if(this.contains(coordinate)){
             return
+        }
+        if(squarePiece != null){
+            if(squarePiece.color == piece.color){
+                piece.protect(squarePiece)
+                return
+            } else {
+                piece.attack(squarePiece)
+            }
         }
         this.add(coordinate)
         if(squarePiece != null){

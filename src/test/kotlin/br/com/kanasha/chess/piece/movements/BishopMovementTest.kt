@@ -5,7 +5,7 @@ import br.com.kanasha.chess.models.NormalGameChessBoard
 import br.com.kanasha.chess.models.piece.Bishop
 import br.com.kanasha.chess.models.piece.ColorEnum
 import br.com.kanasha.chess.models.piece.Pawn
-import br.com.kanasha.chess.service.DiscoverAllowedMovementsService
+import br.com.kanasha.chess.engine.ProcessNormalChessBoardEngine
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -18,7 +18,7 @@ class BishopMovementTest {
         board.squares[2][0].piece = Bishop(ColorEnum.WHITE, "c1")
         val piece = board.squares[2][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.isEmpty())
@@ -30,7 +30,7 @@ class BishopMovementTest {
         board.squares[2][0].piece = Bishop(ColorEnum.WHITE, "c1")
         val piece = board.squares[2][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -45,7 +45,7 @@ class BishopMovementTest {
         board.squares[5][3].piece = Pawn(ColorEnum.BLACK, "f4")
         val piece = board.squares[2][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -61,7 +61,7 @@ class BishopMovementTest {
         board.squares[0][2].piece = Pawn(ColorEnum.BLACK, "a3")
         val piece = board.squares[2][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -76,7 +76,7 @@ class BishopMovementTest {
         board.squares[5][3].piece = Pawn(ColorEnum.WHITE, "f4")
         val piece = board.squares[2][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
@@ -92,7 +92,7 @@ class BishopMovementTest {
         board.squares[1][1].piece = Pawn(ColorEnum.WHITE, "b2")
         val piece = board.squares[2][0].piece!!
 
-        DiscoverAllowedMovementsService(board).discover()
+        ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
         Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(

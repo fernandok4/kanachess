@@ -11,4 +11,21 @@ interface IPiece {
     var allowedCoordinates: List<Pair<Int, Int>> // Coordenadas disponíveis para atacar sendo o first = X e second = Y
     var allowedMoves: List<SquareCoordanate>           // Coordenadas disponiveis para atacar mas em formato PGN
     val pieceMovementTypes: List<IPieceMovement> // Tipos de movimentos das peças
+    var isFirstMove: Boolean
+    var isUnderProtection: Boolean
+    var isUnderAttack: Boolean
+    var isDead: Boolean
+
+    fun protect(otherPiece: IPiece) {
+        otherPiece.isUnderProtection = true
+    }
+
+    fun attack(otherPiece: IPiece) {
+        otherPiece.isUnderAttack = true
+    }
+
+    fun resetPieceStatus(){
+        this.isUnderAttack = false
+        this.isUnderProtection = false
+    }
 }

@@ -12,4 +12,8 @@ class Rook(override val color: ColorEnum,
     override val pieceMovementTypes: List<IPieceMovement> = listOf(RookMovement(this))
 
     override val cdPiece: String = "R"
+    override var isFirstMove: Boolean = true
+    override var isUnderProtection: Boolean = false
+    override var isUnderAttack: Boolean = false
+    override var isDead: Boolean = false
 }

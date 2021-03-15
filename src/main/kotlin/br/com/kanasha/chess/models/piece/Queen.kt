@@ -13,4 +13,8 @@ class Queen(override val color: ColorEnum,
     override val pieceMovementTypes: List<IPieceMovement> = listOf(BishopMovement(this), RookMovement(this))
 
     override val cdPiece: String = "Q"
+    override var isFirstMove: Boolean = true
+    override var isUnderProtection: Boolean = false
+    override var isUnderAttack: Boolean = false
+    override var isDead: Boolean = false
 }

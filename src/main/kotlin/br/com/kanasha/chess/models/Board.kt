@@ -6,8 +6,10 @@ import br.com.kanasha.chess.models.piece.IPiece
 
 open class Board {
 
+    var colorRound = ColorEnum.WHITE
     var squares = Array(8, { Array(8, { Square() }) })
-    val piecesGroupedByColor by lazy {
+
+    val allPieces by lazy {
         squares.fold(mutableListOf<IPiece>()){ acc, square ->
             square.forEach {
                 if(it.piece != null){
@@ -15,8 +17,13 @@ open class Board {
                 }
             }
             acc
-        }.groupBy { it.color }
+        }
     }
+    val piecesGroupedByColor by lazy {
+        allPieces.groupBy { it.color }
+    }
+
+    fun getSquare(x: Int, y: Int) = squares[x][y]
 
     fun getSquarePiece(x: Int, y: Int) = squares[x][y].piece
 }
