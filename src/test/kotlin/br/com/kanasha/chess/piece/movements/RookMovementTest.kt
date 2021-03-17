@@ -2,7 +2,7 @@ package br.com.kanasha.chess.piece.movements
 
 import br.com.kanasha.chess.models.Board
 import br.com.kanasha.chess.models.NormalGameChessBoard
-import br.com.kanasha.chess.models.piece.ColorEnum
+import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.Pawn
 import br.com.kanasha.chess.models.piece.Rook
 import br.com.kanasha.chess.engine.ProcessNormalChessBoardEngine
@@ -15,7 +15,7 @@ class RookMovementTest {
     fun testRookMovementOnFirstRound(){
         val board = NormalGameChessBoard()
         board.resetBoardPieces()
-        board.squares[0][0].piece = Rook(ColorEnum.WHITE, "a1")
+        board.squares[0][0].piece = Rook(ColorPiece.WHITE, "a1")
         val piece = board.squares[0][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()
@@ -27,7 +27,7 @@ class RookMovementTest {
     @Test
     fun testRookMovementOnEmptyBoard(){
         val board = Board()
-        board.squares[0][0].piece = Rook(ColorEnum.WHITE, "a1")
+        board.squares[0][0].piece = Rook(ColorPiece.WHITE, "a1")
         val piece = board.squares[0][0].piece!!
         val expectedNotations = listOf("Rb1", "Rc1", "Rd1", "Re1", "Rf1", "Rg1", "Rh1", "Ra2", "Ra3", "Ra4", "Ra5", "Ra6", "Ra7", "Ra8")
 
@@ -40,8 +40,8 @@ class RookMovementTest {
     @Test
     fun testRookMovementOnEnemyPieceVerticallyBlocking(){
         val board = Board()
-        board.squares[0][0].piece = Rook(ColorEnum.WHITE, "a1")
-        board.squares[5][0].piece = Pawn(ColorEnum.BLACK, "f1")
+        board.squares[0][0].piece = Rook(ColorPiece.WHITE, "a1")
+        board.squares[5][0].piece = Pawn(ColorPiece.BLACK, "f1")
         val piece = board.squares[0][0].piece!!
         val expectedNotations = listOf("Rb1", "Rc1", "Rd1", "Re1", "Rxf1", "Ra2", "Ra3", "Ra4", "Ra5", "Ra6", "Ra7", "Ra8")
 
@@ -54,8 +54,8 @@ class RookMovementTest {
     @Test
     fun testRookMovementOnEnemyPieceHorizontallyBlocking(){
         val board = Board()
-        board.squares[0][0].piece = Rook(ColorEnum.WHITE, "a1")
-        board.squares[0][5].piece = Pawn(ColorEnum.BLACK, "a6")
+        board.squares[0][0].piece = Rook(ColorPiece.WHITE, "a1")
+        board.squares[0][5].piece = Pawn(ColorPiece.BLACK, "a6")
         val piece = board.squares[0][0].piece!!
         val expectedNotations = listOf("Rb1", "Rc1", "Rd1", "Re1", "Rf1", "Rg1", "Rh1", "Ra2", "Ra3", "Ra4", "Ra5", "Rxa6")
 
@@ -68,9 +68,9 @@ class RookMovementTest {
     @Test
     fun testRookMovementOnEnemyPieceBothAxisBlocking(){
         val board = Board()
-        board.squares[0][0].piece = Rook(ColorEnum.WHITE, "a1")
-        board.squares[0][5].piece = Pawn(ColorEnum.BLACK, "a6")
-        board.squares[5][0].piece = Pawn(ColorEnum.BLACK, "f1")
+        board.squares[0][0].piece = Rook(ColorPiece.WHITE, "a1")
+        board.squares[0][5].piece = Pawn(ColorPiece.BLACK, "a6")
+        board.squares[5][0].piece = Pawn(ColorPiece.BLACK, "f1")
         val piece = board.squares[0][0].piece!!
         val expectedNotations = listOf("Rb1", "Rc1", "Rd1", "Re1", "Rxf1", "Ra2", "Ra3", "Ra4", "Ra5", "Rxa6")
 
@@ -83,9 +83,9 @@ class RookMovementTest {
     @Test
     fun testRookMovementOnAllyPieceBothAxisBlocking(){
         val board = Board()
-        board.squares[0][0].piece = Rook(ColorEnum.WHITE, "a1")
-        board.squares[0][5].piece = Pawn(ColorEnum.WHITE, "a6")
-        board.squares[5][0].piece = Pawn(ColorEnum.WHITE, "f1")
+        board.squares[0][0].piece = Rook(ColorPiece.WHITE, "a1")
+        board.squares[0][5].piece = Pawn(ColorPiece.WHITE, "a6")
+        board.squares[5][0].piece = Pawn(ColorPiece.WHITE, "f1")
         val piece = board.squares[0][0].piece!!
         val expectedNotations = listOf("Rb1", "Rc1", "Rd1", "Re1", "Ra2", "Ra3", "Ra4")
 
@@ -98,9 +98,9 @@ class RookMovementTest {
     @Test
     fun testTwoRooksMovementOnAllyPieceBothAxisBlockingConflict(){
         val board = Board()
-        board.squares[0][0].piece = Rook(ColorEnum.WHITE, "a1")
-        board.squares[7][0].piece = Rook(ColorEnum.WHITE, "h1")
-        board.squares[5][0].piece = Pawn(ColorEnum.BLACK, "f1")
+        board.squares[0][0].piece = Rook(ColorPiece.WHITE, "a1")
+        board.squares[7][0].piece = Rook(ColorPiece.WHITE, "h1")
+        board.squares[5][0].piece = Pawn(ColorPiece.BLACK, "f1")
         val piece = board.squares[0][0].piece!!
         val expecetedNotations = listOf("Rb1", "Rc1", "Rd1", "Re1", "Ra1xf1", "Ra2", "Ra3", "Ra4", "Ra5", "Ra6", "Ra7", "Ra8")
 

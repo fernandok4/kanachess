@@ -3,7 +3,11 @@ package br.com.kanasha.chess.models.piece.movements
 import br.com.kanasha.chess.models.Board
 import br.com.kanasha.chess.models.notation.ChessNotationRead.getCoordenate
 import br.com.kanasha.chess.models.piece.IPiece
+import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
+import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils
+import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.containsCoordinate
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.isOnBoard
+import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.targetAvailableSquare
 
 class RookMovement(private val piece: IPiece): IPieceMovement {
 
@@ -18,33 +22,26 @@ class RookMovement(private val piece: IPiece): IPieceMovement {
     }
 
     fun MutableList<Pair<Int, Int>>.addAvailableSquare(board: Board, coordinate: Pair<Int, Int>, xSquares: Int, ySquares: Int) {
-        if(!coordinate.isOnBoard()){
-            return
-        }
-        if(piece.getCoordenate().equals(coordinate)){
-            this.addAvailableSquare(board, Pair(coordinate.first + xSquares, coordinate.second + ySquares), xSquares, ySquares)
-            return
-        }
-        val square = board.getSquare(coordinate.first, coordinate.second)
-        val squarePiece = square.piece
-        if(board.colorRound != piece.color){
-            square.isUnderEnemyAttack = true
-        }
-        if(this.contains(coordinate)){
-            return
-        }
-        if(squarePiece != null){
-            if(squarePiece.color == piece.color){
-                piece.protect(squarePiece)
+        try{
+            coordinate.isOnBoard()
+            if(piece.getCoordenate().equals(coordinate)){
+                this.addAvailableSquare(board, Pair(coordinate.first + xSquares, coordinate.second + ySquares), xSquares, ySquares)
                 return
-            } else {
-                piece.attack(squarePiece)
             }
-        }
-        this.add(coordinate)
-        if(squarePiece != null){
+            val square = board.getSquare(coordinate.first, coordinate.second)
+            val targetPiece = square.piece
+            if(board.colorRound != piece.color){
+                square.isUnderEnemyAttack = true
+            }
+            this.containsCoordinate(coordinate)
+            piece.targetAvailableSquare(targetPiece)
+            this.add(coordinate)
+            if(targetPiece != null){
+                return
+            }
+            this.addAvailableSquare(board, Pair(coordinate.first + xSquares, coordinate.second + ySquares), xSquares, ySquares)
+        } catch (e: MovementException){
             return
         }
-        this.addAvailableSquare(board, Pair(coordinate.first + xSquares, coordinate.second + ySquares), xSquares, ySquares)
     }
 }

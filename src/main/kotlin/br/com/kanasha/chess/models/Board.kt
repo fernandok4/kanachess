@@ -1,12 +1,12 @@
 package br.com.kanasha.chess.models
 
 import br.com.kanasha.chess.models.board.Square
-import br.com.kanasha.chess.models.piece.ColorEnum
+import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.IPiece
 
 open class Board {
 
-    var colorRound = ColorEnum.WHITE
+    var colorRound = ColorPiece.WHITE
     var squares = Array(8, { Array(8, { Square() }) })
 
     val allPieces by lazy {

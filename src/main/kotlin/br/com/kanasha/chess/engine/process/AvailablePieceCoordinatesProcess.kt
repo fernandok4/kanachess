@@ -1,6 +1,7 @@
 package br.com.kanasha.chess.engine.process
 
 import br.com.kanasha.chess.models.Board
+import br.com.kanasha.chess.models.board.SquareCoordanate
 import br.com.kanasha.chess.models.piece.King
 
 class AvailablePieceCoordinatesProcess(private val board: Board) : ChessProcess {
@@ -11,7 +12,7 @@ class AvailablePieceCoordinatesProcess(private val board: Board) : ChessProcess 
             for(moveType in it.pieceMovementTypes){
                 allowedCoordinates.addAll(moveType.calculateAllowedCoordinates(board))
             }
-            it.allowedCoordinates = allowedCoordinates
+            it.allowedMoves = allowedCoordinates.map { SquareCoordanate(it) }
         }
         return true
     }

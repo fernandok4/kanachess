@@ -16,7 +16,7 @@ object ChessNotationRead {
         val combatNotation = if((targetPiece?.color ?: piece.color) != piece.color) "x" else ""
         val cdPiece = if(piece is Pawn && combatNotation == "x") piece.currentNotationSquare[0] else piece.cdPiece
         val colorPieces = board.piecesGroupedByColor[piece.color]!!
-        val hasAmbiguityPieces = colorPieces.any { it != piece && it.cdPiece == piece.cdPiece && it.allowedCoordinates.any { it.equals(this) } }
+        val hasAmbiguityPieces = colorPieces.any { it != piece && it.cdPiece == piece.cdPiece && it.allowedMoves.any { it.coordanate.equals(this) } }
         val ambiguityNotation = if(hasAmbiguityPieces && piece !is Pawn) piece.currentNotationSquare else ""
         return "$cdPiece$ambiguityNotation$combatNotation$yAxis$xAxis"
     }

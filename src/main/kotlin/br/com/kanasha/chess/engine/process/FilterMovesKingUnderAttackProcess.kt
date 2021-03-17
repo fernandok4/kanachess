@@ -9,7 +9,9 @@ class FilterMovesKingUnderAttackProcess(private val board: Board): ChessProcess 
         val king = allyPieces.find { it is King } ?: return false
         if(!king.isUnderAttack) return true
         allyPieces.forEach { piece ->
-            piece.allowedCoordinates = piece.allowedCoordinates.filter { SimulateMovementToDefendKing(board, piece, it).execute() }
+            piece.allowedMoves = piece.allowedMoves.filter {
+                SimulateMovementToDefendKing(board, piece, it.coordanate).execute()
+            }
         }
         return true
     }

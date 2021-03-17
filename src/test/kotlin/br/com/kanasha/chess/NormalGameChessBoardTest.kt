@@ -1,7 +1,7 @@
 package br.com.kanasha.chess
 
 import br.com.kanasha.chess.models.NormalGameChessBoard
-import br.com.kanasha.chess.models.piece.ColorEnum
+import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.Pawn
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -30,7 +30,7 @@ class NormalGameChessBoardTest {
         val board = NormalGameChessBoard()
         // e4
         board.squares[6][4].piece = null
-        board.squares[4][4].piece = Pawn(ColorEnum.WHITE)
+        board.squares[4][4].piece = Pawn(ColorPiece.WHITE)
         board.resetBoardPieces()
 
         for(xValue in board.squares){

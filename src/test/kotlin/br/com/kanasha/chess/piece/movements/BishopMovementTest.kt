@@ -3,7 +3,7 @@ package br.com.kanasha.chess.piece.movements
 import br.com.kanasha.chess.models.Board
 import br.com.kanasha.chess.models.NormalGameChessBoard
 import br.com.kanasha.chess.models.piece.Bishop
-import br.com.kanasha.chess.models.piece.ColorEnum
+import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.Pawn
 import br.com.kanasha.chess.engine.ProcessNormalChessBoardEngine
 import org.junit.jupiter.api.Assertions
@@ -15,7 +15,7 @@ class BishopMovementTest {
     fun testBishopMovementOnFirstRound(){
         val board = NormalGameChessBoard()
         board.resetBoardPieces()
-        board.squares[2][0].piece = Bishop(ColorEnum.WHITE, "c1")
+        board.squares[2][0].piece = Bishop(ColorPiece.WHITE, "c1")
         val piece = board.squares[2][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()
@@ -27,7 +27,7 @@ class BishopMovementTest {
     @Test
     fun testBishopMovementOnEmptyBoard(){
         val board = Board()
-        board.squares[2][0].piece = Bishop(ColorEnum.WHITE, "c1")
+        board.squares[2][0].piece = Bishop(ColorPiece.WHITE, "c1")
         val piece = board.squares[2][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()
@@ -41,8 +41,8 @@ class BishopMovementTest {
     @Test
     fun testBishopMovementOnEnemyPieceBlocking(){
         val board = Board()
-        board.squares[2][0].piece = Bishop(ColorEnum.WHITE, "c1")
-        board.squares[5][3].piece = Pawn(ColorEnum.BLACK, "f4")
+        board.squares[2][0].piece = Bishop(ColorPiece.WHITE, "c1")
+        board.squares[5][3].piece = Pawn(ColorPiece.BLACK, "f4")
         val piece = board.squares[2][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()
@@ -56,9 +56,9 @@ class BishopMovementTest {
     @Test
     fun testBishopMovementOnTwoEnemyPieceBlocking(){
         val board = Board()
-        board.squares[2][0].piece = Bishop(ColorEnum.WHITE, "c1")
-        board.squares[5][3].piece = Pawn(ColorEnum.BLACK, "f4")
-        board.squares[0][2].piece = Pawn(ColorEnum.BLACK, "a3")
+        board.squares[2][0].piece = Bishop(ColorPiece.WHITE, "c1")
+        board.squares[5][3].piece = Pawn(ColorPiece.BLACK, "f4")
+        board.squares[0][2].piece = Pawn(ColorPiece.BLACK, "a3")
         val piece = board.squares[2][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()
@@ -72,8 +72,8 @@ class BishopMovementTest {
     @Test
     fun testBishopMovementOnAllyPieceBlocking(){
         val board = Board()
-        board.squares[2][0].piece = Bishop(ColorEnum.WHITE, "c1")
-        board.squares[5][3].piece = Pawn(ColorEnum.WHITE, "f4")
+        board.squares[2][0].piece = Bishop(ColorPiece.WHITE, "c1")
+        board.squares[5][3].piece = Pawn(ColorPiece.WHITE, "f4")
         val piece = board.squares[2][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()
@@ -87,9 +87,9 @@ class BishopMovementTest {
     @Test
     fun testBishopMovementOnTwoAllyPieceBlocking(){
         val board = Board()
-        board.squares[2][0].piece = Bishop(ColorEnum.WHITE, "c1")
-        board.squares[5][3].piece = Pawn(ColorEnum.WHITE, "f4")
-        board.squares[1][1].piece = Pawn(ColorEnum.WHITE, "b2")
+        board.squares[2][0].piece = Bishop(ColorPiece.WHITE, "c1")
+        board.squares[5][3].piece = Pawn(ColorPiece.WHITE, "f4")
+        board.squares[1][1].piece = Pawn(ColorPiece.WHITE, "b2")
         val piece = board.squares[2][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()

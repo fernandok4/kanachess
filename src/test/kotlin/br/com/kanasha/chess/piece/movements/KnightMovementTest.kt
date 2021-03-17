@@ -1,7 +1,7 @@
 package br.com.kanasha.chess.piece.movements
 
 import br.com.kanasha.chess.models.NormalGameChessBoard
-import br.com.kanasha.chess.models.piece.ColorEnum
+import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.Knight
 import br.com.kanasha.chess.models.piece.Pawn
 import br.com.kanasha.chess.engine.ProcessNormalChessBoardEngine
@@ -30,9 +30,9 @@ class KnightMovementTest {
 
         // 1. Nf3 e5
         board.squares[6][0].piece = null
-        board.squares[5][2].piece = Knight(ColorEnum.WHITE, "f3")
+        board.squares[5][2].piece = Knight(ColorPiece.WHITE, "f3")
         board.squares[4][6].piece = null
-        board.squares[4][4].piece = Pawn(ColorEnum.BLACK, "e5")
+        board.squares[4][4].piece = Pawn(ColorPiece.BLACK, "e5")
 
         val piece = board.squares[5][2].piece!!
         val expectedMoveNotations = listOf("Ng1", "Nh4", "Nd4", "Ng5", "Nxe5")
