@@ -7,7 +7,6 @@ interface IPiece {
 
     val cdPiece: String                          // Código da peça de acordo com PGN
     val color: ColorPiece
-    var currentNotationSquare: String            // Posição atual do tabuleiro usando notação PGN
     var allowedMoves: List<SquareCoordanate>           // Coordenadas disponiveis para atacar mas em formato PGN
     val pieceMovementTypes: List<IPieceMovement> // Tipos de movimentos das peças
     var isUnderProtection: Boolean

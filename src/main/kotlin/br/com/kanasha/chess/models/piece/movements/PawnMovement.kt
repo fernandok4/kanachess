@@ -1,11 +1,10 @@
 package br.com.kanasha.chess.models.piece.movements
 
 import br.com.kanasha.chess.models.Board
-import br.com.kanasha.chess.models.notation.ChessNotationRead.getCoordenate
 import br.com.kanasha.chess.models.piece.IPieceSpecialMovementOnFirstMovement
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
-import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.containsCoordinate
+import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.hasPieceOnCoordinate
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.isOnBoard
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.targetAvailableSquare
 import java.lang.Exception
@@ -13,7 +12,7 @@ import java.lang.Exception
 class PawnMovement(private val piece: IPieceSpecialMovementOnFirstMovement): IPieceMovement {
     override fun calculateAllowedCoordinates(board: Board): List<Pair<Int, Int>> {
         val possibleCoordinates = mutableListOf<Pair<Int, Int>>()
-        val currentCoordinate = piece.getCoordenate()
+        val currentCoordinate = board.getCoordenate(piece)
         val isAvailableSquare = possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first + (1 * piece.color.factorSide.first), currentCoordinate.second + (1 * piece.color.factorSide.second)))
         if(piece.isFirstMove && isAvailableSquare){
             possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first + (2 * piece.color.factorSide.first), currentCoordinate.second + (2 * piece.color.factorSide.second)))
@@ -26,10 +25,10 @@ class PawnMovement(private val piece: IPieceSpecialMovementOnFirstMovement): IPi
     fun MutableList<Pair<Int, Int>>.addAvailableSquare(board: Board, coordinate: Pair<Int, Int>): Boolean {
         try {
             coordinate.isOnBoard()
-            val squarePiece = board.getSquarePiece(coordinate.first, coordinate.second)
-            if(this.contains(coordinate) || squarePiece != null){
-                return false
+            if(coordinate.hasPieceOnCoordinate(board)){
+                throw MovementException()
             }
+            this.containsCoordinate(coordinate)
             return this.add(coordinate)
         } catch (e: Exception){
             return false
@@ -44,8 +43,8 @@ class PawnMovement(private val piece: IPieceSpecialMovementOnFirstMovement): IPi
             if(board.colorRound != piece.color){
                 square.isUnderEnemyAttack = true
             }
-            if(targetPiece == null){
-                return false
+            if(!coordinate.hasPieceOnCoordinate(board)){
+                throw MovementException()
             }
             this.containsCoordinate(coordinate)
             piece.targetAvailableSquare(targetPiece)

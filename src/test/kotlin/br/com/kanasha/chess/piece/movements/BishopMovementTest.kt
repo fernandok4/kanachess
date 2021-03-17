@@ -15,7 +15,7 @@ class BishopMovementTest {
     fun testBishopMovementOnFirstRound(){
         val board = NormalGameChessBoard()
         board.resetBoardPieces()
-        board.squares[2][0].piece = Bishop(ColorPiece.WHITE, "c1")
+        board.squares[2][0].piece = Bishop(ColorPiece.WHITE)
         val piece = board.squares[2][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()
@@ -27,7 +27,7 @@ class BishopMovementTest {
     @Test
     fun testBishopMovementOnEmptyBoard(){
         val board = Board()
-        board.squares[2][0].piece = Bishop(ColorPiece.WHITE, "c1")
+        board.squares[2][0].piece = Bishop(ColorPiece.WHITE)
         val piece = board.squares[2][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()
@@ -41,8 +41,8 @@ class BishopMovementTest {
     @Test
     fun testBishopMovementOnEnemyPieceBlocking(){
         val board = Board()
-        board.squares[2][0].piece = Bishop(ColorPiece.WHITE, "c1")
-        board.squares[5][3].piece = Pawn(ColorPiece.BLACK, "f4")
+        board.squares[2][0].piece = Bishop(ColorPiece.WHITE)
+        board.squares[5][3].piece = Pawn(ColorPiece.BLACK)
         val piece = board.squares[2][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()
@@ -56,9 +56,9 @@ class BishopMovementTest {
     @Test
     fun testBishopMovementOnTwoEnemyPieceBlocking(){
         val board = Board()
-        board.squares[2][0].piece = Bishop(ColorPiece.WHITE, "c1")
-        board.squares[5][3].piece = Pawn(ColorPiece.BLACK, "f4")
-        board.squares[0][2].piece = Pawn(ColorPiece.BLACK, "a3")
+        board.squares[2][0].piece = Bishop(ColorPiece.WHITE)
+        board.squares[5][3].piece = Pawn(ColorPiece.BLACK)
+        board.squares[0][2].piece = Pawn(ColorPiece.BLACK)
         val piece = board.squares[2][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()
@@ -72,8 +72,8 @@ class BishopMovementTest {
     @Test
     fun testBishopMovementOnAllyPieceBlocking(){
         val board = Board()
-        board.squares[2][0].piece = Bishop(ColorPiece.WHITE, "c1")
-        board.squares[5][3].piece = Pawn(ColorPiece.WHITE, "f4")
+        board.squares[2][0].piece = Bishop(ColorPiece.WHITE)
+        board.squares[5][3].piece = Pawn(ColorPiece.WHITE)
         val piece = board.squares[2][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()
@@ -87,9 +87,9 @@ class BishopMovementTest {
     @Test
     fun testBishopMovementOnTwoAllyPieceBlocking(){
         val board = Board()
-        board.squares[2][0].piece = Bishop(ColorPiece.WHITE, "c1")
-        board.squares[5][3].piece = Pawn(ColorPiece.WHITE, "f4")
-        board.squares[1][1].piece = Pawn(ColorPiece.WHITE, "b2")
+        board.squares[2][0].piece = Bishop(ColorPiece.WHITE)
+        board.squares[5][3].piece = Pawn(ColorPiece.WHITE)
+        board.squares[1][1].piece = Pawn(ColorPiece.WHITE)
         val piece = board.squares[2][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()

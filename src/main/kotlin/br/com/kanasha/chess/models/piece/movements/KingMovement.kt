@@ -1,18 +1,17 @@
 package br.com.kanasha.chess.models.piece.movements
 
 import br.com.kanasha.chess.models.Board
-import br.com.kanasha.chess.models.notation.ChessNotationRead.getCoordenate
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.King
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
-import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils
+import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.containsCoordinate
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.isOnBoard
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.targetAvailableSquare
 
 class KingMovement(private val piece: IPiece): IPieceMovement {
     override fun calculateAllowedCoordinates(board: Board): List<Pair<Int, Int>> {
         val possibleCoordinates = mutableListOf<Pair<Int, Int>>()
-        val currentCoordinate = piece.getCoordenate()
+        val currentCoordinate = board.getCoordenate(piece)
         currentCoordinate.getArroundSquares().forEach {
             possibleCoordinates.addAvailableSquare(board, it)
         }
@@ -28,7 +27,8 @@ class KingMovement(private val piece: IPiece): IPieceMovement {
                 square.isUnderEnemyAttack = true
             }
             piece.targetAvailableSquare(targetPiece)
-            if(this.contains(coordinate) || square.isUnderEnemyAttack || targetPiece?.isUnderProtection ?: false){
+            this.containsCoordinate(coordinate)
+            if(square.isUnderEnemyAttack || targetPiece?.isUnderProtection ?: false){
                 return
             }
             val hasOppositeEnemyKing = coordinate.getArroundSquares().hasOppositeEnemyKing(board)

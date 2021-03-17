@@ -1,10 +1,8 @@
 package br.com.kanasha.chess.models.piece.movements
 
 import br.com.kanasha.chess.models.Board
-import br.com.kanasha.chess.models.notation.ChessNotationRead.getCoordenate
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
-import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.containsCoordinate
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.isOnBoard
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.targetAvailableSquare
@@ -13,7 +11,7 @@ class KnightMovement(private val piece: IPiece): IPieceMovement {
 
     override fun calculateAllowedCoordinates(board: Board): List<Pair<Int, Int>> {
         val possibleCoordinates = mutableListOf<Pair<Int, Int>>()
-        val currentCoordinate = piece.getCoordenate()
+        val currentCoordinate = board.getCoordenate(piece)
         possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first + 2, currentCoordinate.second + 1))
         possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first + 2, currentCoordinate.second - 1))
         possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first - 2, currentCoordinate.second + 1))

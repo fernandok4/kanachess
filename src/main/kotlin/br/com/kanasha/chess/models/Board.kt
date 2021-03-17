@@ -26,4 +26,17 @@ open class Board {
     fun getSquare(x: Int, y: Int) = squares[x][y]
 
     fun getSquarePiece(x: Int, y: Int) = squares[x][y].piece
+
+    fun getCoordenate(piece: IPiece): Pair<Int, Int> {
+        var yCoordinate = -1
+        var xCoordinate = -1
+        for((xIndex, squares) in this.squares.withIndex()){
+            yCoordinate = squares.indexOfFirst { it.piece == piece }
+            if(yCoordinate != -1){
+                xCoordinate = xIndex
+                break
+            }
+        }
+        return Pair(xCoordinate, yCoordinate)
+    }
 }

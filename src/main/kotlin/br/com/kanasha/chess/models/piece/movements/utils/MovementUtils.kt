@@ -1,5 +1,6 @@
 package br.com.kanasha.chess.models.piece.movements.utils
 
+import br.com.kanasha.chess.models.Board
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
 
@@ -11,6 +12,11 @@ object MovementUtils {
         if(this.first !in boardSquareSize || this.second !in boardSquareSize){
             throw MovementException()
         }
+    }
+
+    fun Pair<Int, Int>.hasPieceOnCoordinate(board: Board): Boolean {
+        val squarePiece = board.getSquarePiece(this.first, this.second)
+        return squarePiece != null
     }
 
     fun List<Pair<Int, Int>>.containsCoordinate(coordinate: Pair<Int, Int>){

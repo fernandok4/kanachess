@@ -4,8 +4,7 @@ import br.com.kanasha.chess.models.board.SquareCoordanate
 import br.com.kanasha.chess.models.piece.movements.IPieceMovement
 import br.com.kanasha.chess.models.piece.movements.KnightMovement
 
-class Knight(override val color: ColorPiece,
-             override var currentNotationSquare: String = ""): IPiece {
+class Knight(override val color: ColorPiece): IPiece {
 
     override var allowedMoves: List<SquareCoordanate> = listOf()
     override val pieceMovementTypes: List<IPieceMovement> = listOf(KnightMovement(this))

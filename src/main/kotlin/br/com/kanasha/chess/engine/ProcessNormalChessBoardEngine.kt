@@ -10,7 +10,7 @@ class ProcessNormalChessBoardEngine(private val board: Board) {
 
     fun process(){
         ResetPiecesStatusProcess(board).execute()
-        AvailablePieceCoordinatesProcess(board).execute()
+        AvailablePieceCoordinatesProcess(board, board.allPieces).execute()
         FilterMovesKingUnderAttackProcess(board).execute()
         MoveNotationsProcess(board).execute()
     }

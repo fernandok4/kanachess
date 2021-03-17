@@ -4,8 +4,7 @@ import br.com.kanasha.chess.models.board.SquareCoordanate
 import br.com.kanasha.chess.models.piece.movements.IPieceMovement
 import br.com.kanasha.chess.models.piece.movements.PawnMovement
 
-class Pawn(override val color: ColorPiece,
-           override var currentNotationSquare: String = ""): IPieceSpecialMovementOnFirstMovement, IPieceSpecialMovement {
+class Pawn(override val color: ColorPiece): IPieceSpecialMovementOnFirstMovement, IPieceSpecialMovement {
 
     override var allowedMoves: List<SquareCoordanate> = listOf()
     override var isUnderProtection: Boolean = false

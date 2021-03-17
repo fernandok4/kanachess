@@ -5,8 +5,7 @@ import br.com.kanasha.chess.models.piece.movements.BishopMovement
 import br.com.kanasha.chess.models.piece.movements.IPieceMovement
 import br.com.kanasha.chess.models.piece.movements.RookMovement
 
-class Queen(override val color: ColorPiece,
-            override var currentNotationSquare: String = ""): IPiece {
+class Queen(override val color: ColorPiece): IPiece {
 
     override var allowedMoves: List<SquareCoordanate> = listOf()
     override var isUnderProtection: Boolean = false

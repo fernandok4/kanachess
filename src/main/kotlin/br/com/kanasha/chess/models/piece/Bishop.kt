@@ -4,8 +4,7 @@ import br.com.kanasha.chess.models.board.SquareCoordanate
 import br.com.kanasha.chess.models.piece.movements.BishopMovement
 import br.com.kanasha.chess.models.piece.movements.IPieceMovement
 
-class Bishop(override val color: ColorPiece,
-             override var currentNotationSquare: String = ""): IPiece {
+class Bishop(override val color: ColorPiece): IPiece {
 
     override val pieceMovementTypes: List<IPieceMovement> = listOf(BishopMovement(this))
     override val cdPiece: String = "B"

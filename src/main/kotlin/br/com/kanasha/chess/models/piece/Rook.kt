@@ -4,8 +4,7 @@ import br.com.kanasha.chess.models.board.SquareCoordanate
 import br.com.kanasha.chess.models.piece.movements.IPieceMovement
 import br.com.kanasha.chess.models.piece.movements.RookMovement
 
-class Rook(override val color: ColorPiece,
-           override var currentNotationSquare: String = ""): IPieceSpecialMovementOnFirstMovement {
+class Rook(override val color: ColorPiece): IPieceSpecialMovementOnFirstMovement {
 
     override val pieceMovementTypes: List<IPieceMovement> = listOf(RookMovement(this))
     override val cdPiece: String = "R"
