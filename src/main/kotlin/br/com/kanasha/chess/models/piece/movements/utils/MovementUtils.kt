@@ -1,6 +1,6 @@
 package br.com.kanasha.chess.models.piece.movements.utils
 
-import br.com.kanasha.chess.models.Board
+import br.com.kanasha.chess.models.IBoard
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
 
@@ -14,8 +14,8 @@ object MovementUtils {
         }
     }
 
-    fun Pair<Int, Int>.hasPieceOnCoordinate(board: Board): Boolean {
-        val squarePiece = board.getSquarePiece(this.first, this.second)
+    fun Pair<Int, Int>.hasPieceOnCoordinate(board: IBoard): Boolean {
+        val squarePiece = board.getSquare(this.first, this.second).piece
         return squarePiece != null
     }
 

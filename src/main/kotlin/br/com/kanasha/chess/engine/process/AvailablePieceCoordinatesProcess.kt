@@ -1,11 +1,11 @@
 package br.com.kanasha.chess.engine.process
 
-import br.com.kanasha.chess.models.Board
+import br.com.kanasha.chess.models.IBoard
 import br.com.kanasha.chess.models.board.SquareCoordanate
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.King
 
-class AvailablePieceCoordinatesProcess(private val board: Board,
+class AvailablePieceCoordinatesProcess(private val board: IBoard,
                                        private val pieces: List<IPiece>) : ChessProcess {
 
     override fun execute(): Boolean {

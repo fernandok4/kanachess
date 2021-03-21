@@ -12,7 +12,7 @@ class NormalGameChessBoardTest {
     fun verifyResetBoardPiecesIfPiecesIsOnInitialPositions(){
         val board = NormalGameChessBoard()
 
-        board.resetBoardPieces()
+        board.resetBoard()
 
         for(xValue in board.squares){
             for((yIndex, yValue) in xValue.withIndex()){
@@ -31,7 +31,7 @@ class NormalGameChessBoardTest {
         // e4
         board.squares[6][4].piece = null
         board.squares[4][4].piece = Pawn(ColorPiece.WHITE)
-        board.resetBoardPieces()
+        board.resetBoard()
 
         for(xValue in board.squares){
             for((yIndex, yValue) in xValue.withIndex()){

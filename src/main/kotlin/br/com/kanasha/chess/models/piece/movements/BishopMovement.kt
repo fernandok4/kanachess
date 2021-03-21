@@ -1,6 +1,6 @@
 package br.com.kanasha.chess.models.piece.movements
 
-import br.com.kanasha.chess.models.Board
+import br.com.kanasha.chess.models.IBoard
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.containsCoordinate
@@ -9,9 +9,9 @@ import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.targetAva
 
 class BishopMovement(private val piece: IPiece): IPieceMovement {
 
-    override fun calculateAllowedCoordinates(board: Board): List<Pair<Int, Int>> {
+    override fun calculateAllowedCoordinates(board: IBoard): List<Pair<Int, Int>> {
         val possibleCoordinates = mutableListOf<Pair<Int, Int>>()
-        val currentCoordinate = board.getCoordenate(piece)
+        val currentCoordinate = board.getPieceCoordenate(piece)
         possibleCoordinates.addAvailableSquare(board, currentCoordinate, 1, 1)
         possibleCoordinates.addAvailableSquare(board, currentCoordinate, -1, -1)
         possibleCoordinates.addAvailableSquare(board, currentCoordinate, -1, 1)
@@ -19,10 +19,10 @@ class BishopMovement(private val piece: IPiece): IPieceMovement {
         return possibleCoordinates
     }
 
-    fun MutableList<Pair<Int, Int>>.addAvailableSquare(board: Board, coordinate: Pair<Int, Int>, xSquares: Int, ySquares: Int) {
+    fun MutableList<Pair<Int, Int>>.addAvailableSquare(board: IBoard, coordinate: Pair<Int, Int>, xSquares: Int, ySquares: Int) {
         try {
             coordinate.isOnBoard()
-            if(board.getCoordenate(piece).equals(coordinate)){
+            if(board.getPieceCoordenate(piece).equals(coordinate)){
                 this.addAvailableSquare(board, Pair(coordinate.first + xSquares, coordinate.second + ySquares), xSquares, ySquares)
                 return
             }

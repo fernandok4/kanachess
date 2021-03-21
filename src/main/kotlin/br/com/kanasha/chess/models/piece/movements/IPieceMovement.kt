@@ -1,8 +1,8 @@
 package br.com.kanasha.chess.models.piece.movements
 
-import br.com.kanasha.chess.models.Board
+import br.com.kanasha.chess.models.IBoard
 
 interface IPieceMovement {
 
-    fun calculateAllowedCoordinates(board: Board): List<Pair<Int, Int>>
+    fun calculateAllowedCoordinates(board: IBoard): List<Pair<Int, Int>>
 }

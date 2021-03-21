@@ -1,7 +1,7 @@
 package br.com.kanasha.chess.models.piece.movements
 
-import br.com.kanasha.chess.models.Board
-import br.com.kanasha.chess.models.piece.IPieceSpecialMovementOnFirstMovement
+import br.com.kanasha.chess.models.IBoard
+import br.com.kanasha.chess.models.piece.IPieceSpecial
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.containsCoordinate
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.hasPieceOnCoordinate
@@ -9,10 +9,10 @@ import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.isOnBoard
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.targetAvailableSquare
 import java.lang.Exception
 
-class PawnMovement(private val piece: IPieceSpecialMovementOnFirstMovement): IPieceMovement {
-    override fun calculateAllowedCoordinates(board: Board): List<Pair<Int, Int>> {
+class PawnMovement(private val piece: IPieceSpecial): IPieceMovement {
+    override fun calculateAllowedCoordinates(board: IBoard): List<Pair<Int, Int>> {
         val possibleCoordinates = mutableListOf<Pair<Int, Int>>()
-        val currentCoordinate = board.getCoordenate(piece)
+        val currentCoordinate = board.getPieceCoordenate(piece)
         val isAvailableSquare = possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first + (1 * piece.color.factorSide.first), currentCoordinate.second + (1 * piece.color.factorSide.second)))
         if(piece.isFirstMove && isAvailableSquare){
             possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first + (2 * piece.color.factorSide.first), currentCoordinate.second + (2 * piece.color.factorSide.second)))
@@ -22,7 +22,7 @@ class PawnMovement(private val piece: IPieceSpecialMovementOnFirstMovement): IPi
         return possibleCoordinates
     }
 
-    fun MutableList<Pair<Int, Int>>.addAvailableSquare(board: Board, coordinate: Pair<Int, Int>): Boolean {
+    fun MutableList<Pair<Int, Int>>.addAvailableSquare(board: IBoard, coordinate: Pair<Int, Int>): Boolean {
         try {
             coordinate.isOnBoard()
             if(coordinate.hasPieceOnCoordinate(board)){
@@ -35,7 +35,7 @@ class PawnMovement(private val piece: IPieceSpecialMovementOnFirstMovement): IPi
         }
     }
 
-    fun MutableList<Pair<Int, Int>>.addAttackSquare(board: Board, coordinate: Pair<Int, Int>): Boolean {
+    fun MutableList<Pair<Int, Int>>.addAttackSquare(board: IBoard, coordinate: Pair<Int, Int>): Boolean {
         try{
             coordinate.isOnBoard()
             val square = board.getSquare(coordinate.first, coordinate.second)

@@ -1,9 +1,9 @@
 package br.com.kanasha.chess.engine.process
 
-import br.com.kanasha.chess.models.Board
+import br.com.kanasha.chess.models.IBoard
 import br.com.kanasha.chess.models.notation.ChessNotationRead.toNotationPGN
 
-class MoveNotationsProcess(private val board: Board): ChessProcess {
+class ParseMoveNotationsProcess(private val board: IBoard): ChessProcess {
     override fun execute(): Boolean {
         board.allPieces.filter { !it.isDead }.forEach { piece ->
             piece.allowedMoves.forEach {

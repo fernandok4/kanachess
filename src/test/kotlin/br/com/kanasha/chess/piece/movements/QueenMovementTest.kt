@@ -1,11 +1,11 @@
 package br.com.kanasha.chess.piece.movements
 
-import br.com.kanasha.chess.models.Board
 import br.com.kanasha.chess.models.NormalGameChessBoard
 import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.Pawn
 import br.com.kanasha.chess.models.piece.Queen
 import br.com.kanasha.chess.engine.ProcessNormalChessBoardEngine
+import br.com.kanasha.chess.models.EmptyChessBoard
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -13,7 +13,7 @@ class QueenMovementTest {
     @Test
     fun testQueenMovingLikeBishopMovementOnFirstRound(){
         val board = NormalGameChessBoard()
-        board.resetBoardPieces()
+        board.resetBoard()
         board.squares[2][0].piece = Queen(ColorPiece.WHITE)
         val piece = board.squares[2][0].piece!!
 
@@ -25,7 +25,7 @@ class QueenMovementTest {
 
     @Test
     fun testQueenMovingLikeBishopMovementOnEmptyBoard(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[2][0].piece = Queen(ColorPiece.WHITE)
         val piece = board.squares[2][0].piece!!
 
@@ -39,7 +39,7 @@ class QueenMovementTest {
 
     @Test
     fun testQueenMovingLikeBishopMovementOnEnemyPieceBlocking(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[2][0].piece = Queen(ColorPiece.WHITE)
         board.squares[5][3].piece = Pawn(ColorPiece.BLACK)
         val piece = board.squares[2][0].piece!!
@@ -54,7 +54,7 @@ class QueenMovementTest {
 
     @Test
     fun testQueenMovingLikeBishopMovementOnTwoEnemyPieceBlocking(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[2][0].piece = Queen(ColorPiece.WHITE)
         board.squares[5][3].piece = Pawn(ColorPiece.BLACK)
         board.squares[0][2].piece = Pawn(ColorPiece.BLACK)
@@ -70,7 +70,7 @@ class QueenMovementTest {
 
     @Test
     fun testQueenMovingLikeBishopMovementOnAllyPieceBlocking(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[2][0].piece = Queen(ColorPiece.WHITE)
         board.squares[5][3].piece = Pawn(ColorPiece.WHITE)
         val piece = board.squares[2][0].piece!!
@@ -85,7 +85,7 @@ class QueenMovementTest {
 
     @Test
     fun testQueenMovingLikeBishopMovementOnTwoAllyPieceBlocking(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[2][0].piece = Queen(ColorPiece.WHITE)
         board.squares[5][3].piece = Pawn(ColorPiece.WHITE)
         board.squares[1][1].piece = Pawn(ColorPiece.WHITE)
@@ -102,7 +102,7 @@ class QueenMovementTest {
     @Test
     fun testQueenMovingLikeRookMovementOnFirstRound(){
         val board = NormalGameChessBoard()
-        board.resetBoardPieces()
+        board.resetBoard()
         board.squares[0][0].piece = Queen(ColorPiece.WHITE)
         val piece = board.squares[0][0].piece!!
 
@@ -114,7 +114,7 @@ class QueenMovementTest {
 
     @Test
     fun testQueenMovingLikeRookMovementOnEmptyBoard(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[0][0].piece = Queen(ColorPiece.WHITE)
         val piece = board.squares[0][0].piece!!
 
@@ -128,7 +128,7 @@ class QueenMovementTest {
 
     @Test
     fun testQueenMovingLikeRookMovementOnEnemyPieceVerticallyBlocking(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[0][0].piece = Queen(ColorPiece.WHITE)
         board.squares[5][0].piece = Pawn(ColorPiece.BLACK)
         val piece = board.squares[0][0].piece!!
@@ -143,7 +143,7 @@ class QueenMovementTest {
 
     @Test
     fun testQueenMovingLikeRookMovementOnEnemyPieceHorizontallyBlocking(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[0][0].piece = Queen(ColorPiece.WHITE)
         board.squares[0][5].piece = Pawn(ColorPiece.BLACK)
         val piece = board.squares[0][0].piece!!
@@ -158,7 +158,7 @@ class QueenMovementTest {
 
     @Test
     fun testQueenMovingLikeRookMovementOnEnemyPieceBothAxisBlocking(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[0][0].piece = Queen(ColorPiece.WHITE)
         board.squares[0][5].piece = Pawn(ColorPiece.BLACK)
         board.squares[5][0].piece = Pawn(ColorPiece.BLACK)
@@ -174,7 +174,7 @@ class QueenMovementTest {
 
     @Test
     fun testQueenMovingLikeRookMovementOnAllyPieceBothAxisBlocking(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[0][0].piece = Queen(ColorPiece.WHITE)
         board.squares[0][5].piece = Pawn(ColorPiece.WHITE)
         board.squares[5][0].piece = Pawn(ColorPiece.WHITE)
@@ -190,7 +190,7 @@ class QueenMovementTest {
 
     @Test
     fun testTwoRooksMovementOnAllyPieceBothAxisBlockingConflict(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[0][0].piece = Queen(ColorPiece.WHITE)
         board.squares[7][0].piece = Queen(ColorPiece.WHITE)
         board.squares[5][0].piece = Pawn(ColorPiece.BLACK)

@@ -13,7 +13,7 @@ class KnightMovementTest {
     @Test
     fun testKnightMovementOnFirstRound(){
         val board = NormalGameChessBoard()
-        board.resetBoardPieces()
+        board.resetBoard()
         val piece = board.squares[6][0].piece!!
         val expectedMoveNotations = listOf("Nf3", "Nh3")
 
@@ -26,7 +26,7 @@ class KnightMovementTest {
     @Test
     fun testKnightMovementOnAttackPiece(){
         val board = NormalGameChessBoard()
-        board.resetBoardPieces()
+        board.resetBoard()
 
         // 1. Nf3 e5
         board.squares[6][0].piece = null

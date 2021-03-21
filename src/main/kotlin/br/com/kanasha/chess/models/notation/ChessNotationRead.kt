@@ -1,6 +1,6 @@
 package br.com.kanasha.chess.models.notation
 
-import br.com.kanasha.chess.models.Board
+import br.com.kanasha.chess.models.IBoard
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.Pawn
 
@@ -9,8 +9,8 @@ object ChessNotationRead {
     val yAxisList = arrayOf('1', '2', '3', '4', '5', '6', '7', '8')
     val xAxisList = arrayOf('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
 
-    fun Pair<Int, Int>.toNotationPGN(board: Board, piece: IPiece): String {
-        val pieceCoordinate = board.getCoordenate(piece)
+    fun Pair<Int, Int>.toNotationPGN(board: IBoard, piece: IPiece): String {
+        val pieceCoordinate = board.getPieceCoordenate(piece)
         val targetPiece = board.squares[this.first][this.second].piece
         val targetXAxis = xAxisList[this.first]
         val targetYAxis = yAxisList[this.second]

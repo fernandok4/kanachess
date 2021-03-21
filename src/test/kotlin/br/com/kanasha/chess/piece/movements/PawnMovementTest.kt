@@ -13,7 +13,7 @@ class PawnMovementTest {
     @Test
     fun testPawnMovementOnFirstRound(){
         val board = NormalGameChessBoard()
-        board.resetBoardPieces()
+        board.resetBoard()
         board.squares[4][1].piece = Pawn(ColorPiece.WHITE)
         val piece = board.squares[4][1].piece!!
         val expectedMoveNotations = listOf("e3", "e4")
@@ -27,7 +27,7 @@ class PawnMovementTest {
     @Test
     fun testPawnMovementOnSecondRound(){
         val board = NormalGameChessBoard()
-        board.resetBoardPieces()
+        board.resetBoard()
         // 1. e4 e5
         board.squares[4][1].piece = null
         board.squares[4][3].piece = Pawn(ColorPiece.WHITE)
@@ -45,7 +45,7 @@ class PawnMovementTest {
     @Test
     fun testPawnMovementOnSecondRoundAttackSquare(){
         val board = NormalGameChessBoard()
-        board.resetBoardPieces()
+        board.resetBoard()
         // 1. e4 e5
         board.squares[4][1].piece = null
         board.squares[4][3].piece = Pawn(ColorPiece.WHITE)
@@ -65,7 +65,7 @@ class PawnMovementTest {
     @Test
     fun testPawnMovementOnSecondRoundAttackSquareAmbiguity(){
         val board = NormalGameChessBoard()
-        board.resetBoardPieces()
+        board.resetBoard()
         // 1. e4 e5
         board.squares[4][1].piece = null
         board.squares[4][3].piece = Pawn(ColorPiece.WHITE)

@@ -1,7 +1,7 @@
 package br.com.kanasha.chess.piece.movements
 
 import br.com.kanasha.chess.engine.ProcessNormalChessBoardEngine
-import br.com.kanasha.chess.models.Board
+import br.com.kanasha.chess.models.EmptyChessBoard
 import br.com.kanasha.chess.models.NormalGameChessBoard
 import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.King
@@ -15,7 +15,7 @@ class KingMovementTest {
     @Test
     fun testKingMovementOnFirstRound(){
         val board = NormalGameChessBoard()
-        board.resetBoardPieces()
+        board.resetBoard()
         val piece = board.squares[4][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()
@@ -27,7 +27,7 @@ class KingMovementTest {
     @Test
     fun testKingMovementOnSecondRound(){
         val board = NormalGameChessBoard()
-        board.resetBoardPieces()
+        board.resetBoard()
         // 1. e4 e5
         board.squares[4][1].piece = null
         board.squares[4][3].piece = Pawn(ColorPiece.WHITE)
@@ -46,7 +46,7 @@ class KingMovementTest {
 
     @Test
     fun testKingMovementOnEmptyBoard(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[4][3].piece = King(ColorPiece.WHITE)
         val piece = board.squares[4][3].piece!!
         val expectedNotations = listOf("Ke5", "Kf5", "Kf4", "Kf3", "Ke3", "Kd4", "Kd5", "Kd3")
@@ -59,7 +59,7 @@ class KingMovementTest {
 
     @Test
     fun testKingMovementOnEmptyBoardWithAttack(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[4][3].piece = King(ColorPiece.WHITE)
         board.squares[4][4].piece = Pawn(ColorPiece.BLACK)
         val piece = board.squares[4][3].piece!!
@@ -73,7 +73,7 @@ class KingMovementTest {
 
     @Test
     fun testKingMovementOnEmptyBoardWithEnemyKingOpposite(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[4][3].piece = King(ColorPiece.WHITE)
         board.squares[4][5].piece = King(ColorPiece.BLACK)
         val piece = board.squares[4][3].piece!!
@@ -87,7 +87,7 @@ class KingMovementTest {
 
     @Test
     fun testKingAttackProtectedPiece(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[4][3].piece = King(ColorPiece.WHITE)
         board.squares[4][4].piece = Pawn(ColorPiece.BLACK)
         board.squares[5][5].piece = Pawn(ColorPiece.BLACK)
@@ -102,7 +102,7 @@ class KingMovementTest {
 
     @Test
     fun testKingBlockedByARook(){
-        val board = Board()
+        val board = EmptyChessBoard()
         board.squares[4][3].piece = King(ColorPiece.WHITE)
         board.squares[5][7].piece = Rook(ColorPiece.BLACK)
         val piece = board.squares[4][3].piece!!
