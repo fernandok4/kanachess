@@ -1,9 +1,5 @@
 package br.com.kanasha.chess.service
 
-import br.com.kanasha.chess.models.NormalGameChessBoard
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
-
 class DiscoverAllowedMovementsServiceTest {
 
 //    @Test

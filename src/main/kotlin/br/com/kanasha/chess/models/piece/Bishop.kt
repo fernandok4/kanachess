@@ -1,6 +1,6 @@
 package br.com.kanasha.chess.models.piece
 
-import br.com.kanasha.chess.models.board.SquareCoordanate
+import br.com.kanasha.chess.models.board.square.SquareCoordanate
 import br.com.kanasha.chess.models.piece.movements.BishopMovement
 import br.com.kanasha.chess.models.piece.movements.IPieceMovement
 

@@ -1,9 +1,8 @@
 package br.com.kanasha.chess.engine.process
 
-import br.com.kanasha.chess.models.IBoard
-import br.com.kanasha.chess.models.board.SquareCoordanate
+import br.com.kanasha.chess.models.board.IBoard
+import br.com.kanasha.chess.models.board.square.SquareCoordanate
 import br.com.kanasha.chess.models.piece.IPiece
-import br.com.kanasha.chess.models.piece.King
 
 class AvailablePieceCoordinatesProcess(private val board: IBoard,
                                        private val pieces: List<IPiece>) : ChessProcess {

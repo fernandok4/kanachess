@@ -1,6 +1,6 @@
 package br.com.kanasha.chess
 
-import br.com.kanasha.chess.models.NormalGameChessBoard
+import br.com.kanasha.chess.models.board.NormalGameChessBoard
 import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.Pawn
 import org.junit.jupiter.api.Assertions

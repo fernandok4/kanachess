@@ -1,14 +1,15 @@
-package br.com.kanasha.chess.models
+package br.com.kanasha.chess.models.board
 
-import br.com.kanasha.chess.models.board.Square
+import br.com.kanasha.chess.models.board.square.Square
 import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.IPiece
 
 interface IBoard {
-    var colorRound: ColorPiece
-    var squares: Array<Array<Square>>
+    val size: Int
     val allPieces: MutableList<IPiece>
     val piecesGroupedByColor: Map<ColorPiece, List<IPiece>>
+    var colorRound: ColorPiece
+    var squares: Array<Array<Square>>
 
     fun resetBoard()
     fun getSquare(x: Int, y: Int): Square = squares[x][y]

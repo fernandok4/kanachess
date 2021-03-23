@@ -1,6 +1,6 @@
 package br.com.kanasha.chess.models.piece.movements
 
-import br.com.kanasha.chess.models.IBoard
+import br.com.kanasha.chess.models.board.IBoard
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.King
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
@@ -20,7 +20,7 @@ class KingMovement(private val piece: IPiece): IPieceMovement {
 
     fun MutableList<Pair<Int, Int>>.addAvailableSquare(board: IBoard, coordinate: Pair<Int, Int>) {
         try {
-            coordinate.isOnBoard()
+            coordinate.isOnBoard(board)
             val square = board.getSquare(coordinate.first, coordinate.second)
             val targetPiece = square.piece
             if(board.colorRound != piece.color){

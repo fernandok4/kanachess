@@ -1,12 +1,11 @@
 package br.com.kanasha.chess.piece.movements
 
-import br.com.kanasha.chess.models.NormalGameChessBoard
+import br.com.kanasha.chess.models.board.NormalGameChessBoard
 import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.Pawn
 import br.com.kanasha.chess.engine.ProcessNormalChessBoardEngine
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import kotlin.system.measureTimeMillis
 
 class PawnMovementTest {
 

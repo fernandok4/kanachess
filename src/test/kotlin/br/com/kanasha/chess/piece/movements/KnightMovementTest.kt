@@ -1,6 +1,6 @@
 package br.com.kanasha.chess.piece.movements
 
-import br.com.kanasha.chess.models.NormalGameChessBoard
+import br.com.kanasha.chess.models.board.NormalGameChessBoard
 import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.Knight
 import br.com.kanasha.chess.models.piece.Pawn

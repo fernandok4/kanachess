@@ -1,6 +1,6 @@
 package br.com.kanasha.chess.models.piece.movements
 
-import br.com.kanasha.chess.models.IBoard
+import br.com.kanasha.chess.models.board.IBoard
 import br.com.kanasha.chess.models.piece.IPieceSpecial
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.containsCoordinate
@@ -24,7 +24,7 @@ class PawnMovement(private val piece: IPieceSpecial): IPieceMovement {
 
     fun MutableList<Pair<Int, Int>>.addAvailableSquare(board: IBoard, coordinate: Pair<Int, Int>): Boolean {
         try {
-            coordinate.isOnBoard()
+            coordinate.isOnBoard(board)
             if(coordinate.hasPieceOnCoordinate(board)){
                 throw MovementException()
             }
@@ -37,7 +37,7 @@ class PawnMovement(private val piece: IPieceSpecial): IPieceMovement {
 
     fun MutableList<Pair<Int, Int>>.addAttackSquare(board: IBoard, coordinate: Pair<Int, Int>): Boolean {
         try{
-            coordinate.isOnBoard()
+            coordinate.isOnBoard(board)
             val square = board.getSquare(coordinate.first, coordinate.second)
             val targetPiece = square.piece
             if(board.colorRound != piece.color){

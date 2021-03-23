@@ -1,4 +1,4 @@
-package br.com.kanasha.chess.models.board
+package br.com.kanasha.chess.models.board.square
 
 import br.com.kanasha.chess.models.piece.IPiece
 

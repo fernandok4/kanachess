@@ -1,15 +1,14 @@
 package br.com.kanasha.chess.models.piece.movements.utils
 
-import br.com.kanasha.chess.models.IBoard
+import br.com.kanasha.chess.models.board.IBoard
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
 
 object MovementUtils {
 
-    val boardSquareSize = 0..7
-
-    fun Pair<Int, Int>.isOnBoard(){
-        if(this.first !in boardSquareSize || this.second !in boardSquareSize){
+    fun Pair<Int, Int>.isOnBoard(board: IBoard){
+        val boardSize = 0..board.size-1
+        if(this.first !in boardSize || this.second !in boardSize){
             throw MovementException()
         }
     }

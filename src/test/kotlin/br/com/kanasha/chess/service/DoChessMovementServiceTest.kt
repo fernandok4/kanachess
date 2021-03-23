@@ -1,10 +1,5 @@
 package br.com.kanasha.chess.service
 
-import br.com.kanasha.chess.models.NormalGameChessBoard
-import br.com.kanasha.chess.models.piece.Pawn
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
-
 class DoChessMovementServiceTest {
 
 //    @Test

@@ -1,7 +1,7 @@
 package br.com.kanasha.chess.engine.process
 
 import br.com.kanasha.chess.engine.process.simulate.SimulateMovementToDefendKing
-import br.com.kanasha.chess.models.IBoard
+import br.com.kanasha.chess.models.board.IBoard
 import br.com.kanasha.chess.models.piece.King
 
 class FilterMovesKingUnderAttackProcess(private val board: IBoard): ChessProcess {

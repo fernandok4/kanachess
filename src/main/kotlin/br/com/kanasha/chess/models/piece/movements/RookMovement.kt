@@ -1,6 +1,6 @@
 package br.com.kanasha.chess.models.piece.movements
 
-import br.com.kanasha.chess.models.IBoard
+import br.com.kanasha.chess.models.board.IBoard
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.containsCoordinate
@@ -21,7 +21,7 @@ class RookMovement(private val piece: IPiece): IPieceMovement {
 
     fun MutableList<Pair<Int, Int>>.addAvailableSquare(board: IBoard, coordinate: Pair<Int, Int>, xSquares: Int, ySquares: Int) {
         try{
-            coordinate.isOnBoard()
+            coordinate.isOnBoard(board)
             if(board.getPieceCoordenate(piece).equals(coordinate)){
                 this.addAvailableSquare(board, Pair(coordinate.first + xSquares, coordinate.second + ySquares), xSquares, ySquares)
                 return

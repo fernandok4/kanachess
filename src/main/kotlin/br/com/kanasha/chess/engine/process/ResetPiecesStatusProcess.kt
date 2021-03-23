@@ -1,6 +1,6 @@
 package br.com.kanasha.chess.engine.process
 
-import br.com.kanasha.chess.models.IBoard
+import br.com.kanasha.chess.models.board.IBoard
 
 class ResetPiecesStatusProcess(private val board: IBoard): ChessProcess {
     override fun execute(): Boolean{

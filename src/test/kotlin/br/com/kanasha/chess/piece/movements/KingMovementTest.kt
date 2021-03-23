@@ -1,8 +1,8 @@
 package br.com.kanasha.chess.piece.movements
 
 import br.com.kanasha.chess.engine.ProcessNormalChessBoardEngine
-import br.com.kanasha.chess.models.EmptyChessBoard
-import br.com.kanasha.chess.models.NormalGameChessBoard
+import br.com.kanasha.chess.models.board.EmptyChessBoard
+import br.com.kanasha.chess.models.board.NormalGameChessBoard
 import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.King
 import br.com.kanasha.chess.models.piece.Pawn

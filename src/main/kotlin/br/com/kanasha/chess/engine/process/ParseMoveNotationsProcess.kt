@@ -1,6 +1,6 @@
 package br.com.kanasha.chess.engine.process
 
-import br.com.kanasha.chess.models.IBoard
+import br.com.kanasha.chess.models.board.IBoard
 import br.com.kanasha.chess.models.notation.ChessNotationRead.toNotationPGN
 
 class ParseMoveNotationsProcess(private val board: IBoard): ChessProcess {
