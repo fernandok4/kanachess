@@ -1,6 +1,7 @@
 package br.com.kanasha.chess.models.board
 
 import br.com.kanasha.chess.models.board.square.Square
+import br.com.kanasha.chess.models.board.square.SquareCoordinate
 import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.IPiece
 
@@ -13,7 +14,7 @@ interface IBoard {
 
     fun resetBoard()
     fun getSquare(x: Int, y: Int): Square = squares[x][y]
-    fun getPieceCoordinate(piece: IPiece): Pair<Int, Int> {
+    fun getPieceCoordinate(piece: IPiece): SquareCoordinate {
         var yCoordinate = -1
         var xCoordinate = -1
         for((xIndex, squares) in this.squares.withIndex()){
@@ -23,7 +24,7 @@ interface IBoard {
                 break
             }
         }
-        return Pair(xCoordinate, yCoordinate)
+        return SquareCoordinate(xCoordinate, yCoordinate)
     }
     fun nextTurn()
 }

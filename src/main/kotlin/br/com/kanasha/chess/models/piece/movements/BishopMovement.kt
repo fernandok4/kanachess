@@ -1,6 +1,7 @@
 package br.com.kanasha.chess.models.piece.movements
 
 import br.com.kanasha.chess.models.board.IBoard
+import br.com.kanasha.chess.models.board.square.SquareCoordinate
 import br.com.kanasha.chess.models.notation.ChessNotationRead.toNotationPGN
 import br.com.kanasha.chess.models.notation.MoveNotation
 import br.com.kanasha.chess.models.piece.IPiece
@@ -21,14 +22,14 @@ class BishopMovement(private val piece: IPiece): IPieceMovement {
         return possibleCoordinates
     }
 
-    private fun MutableList<MoveNotation>.addAvailableSquare(board: IBoard, coordinate: Pair<Int, Int>, xSquares: Int, ySquares: Int) {
+    private fun MutableList<MoveNotation>.addAvailableSquare(board: IBoard, coordinate: SquareCoordinate, xSquares: Int, ySquares: Int) {
         try {
             coordinate.isOnBoard(board)
             if(board.getPieceCoordinate(piece) == coordinate){
-                this.addAvailableSquare(board, Pair(coordinate.first + xSquares, coordinate.second + ySquares), xSquares, ySquares)
+                this.addAvailableSquare(board, SquareCoordinate(coordinate.x + xSquares, coordinate.y + ySquares), xSquares, ySquares)
                 return
             }
-            val square = board.getSquare(coordinate.first, coordinate.second)
+            val square = board.getSquare(coordinate.x, coordinate.y)
             val targetPiece = square.piece
             if(board.colorRound != piece.color){
                 square.isUnderEnemyAttack = true
@@ -39,7 +40,7 @@ class BishopMovement(private val piece: IPiece): IPieceMovement {
             if(targetPiece != null){
                 return
             }
-            this.addAvailableSquare(board, Pair(coordinate.first + xSquares, coordinate.second + ySquares), xSquares, ySquares)
+            this.addAvailableSquare(board, SquareCoordinate(coordinate.x + xSquares, coordinate.y + ySquares), xSquares, ySquares)
         } catch (e: MovementException){
             return
         }
@@ -48,8 +49,8 @@ class BishopMovement(private val piece: IPiece): IPieceMovement {
     override fun doMovement(board: IBoard, stringNotation: String){
         val pieceCoordinate = board.getPieceCoordinate(piece)
         val movementNotation = piece.allowedMoves.find { it.notation == stringNotation }!!
-        board.squares[pieceCoordinate.first][pieceCoordinate.second].piece = null
-        board.squares[movementNotation.coordinate.first][movementNotation.coordinate.second].piece?.isDead = true
-        board.squares[movementNotation.coordinate.first][movementNotation.coordinate.second].piece = piece
+        board.squares[pieceCoordinate.x][pieceCoordinate.y].piece = null
+        board.squares[movementNotation.coordinate.x][movementNotation.coordinate.y].piece?.isDead = true
+        board.squares[movementNotation.coordinate.x][movementNotation.coordinate.y].piece = piece
     }
 }

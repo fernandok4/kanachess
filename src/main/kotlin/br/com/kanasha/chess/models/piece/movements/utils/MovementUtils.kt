@@ -1,25 +1,26 @@
 package br.com.kanasha.chess.models.piece.movements.utils
 
 import br.com.kanasha.chess.models.board.IBoard
+import br.com.kanasha.chess.models.board.square.SquareCoordinate
 import br.com.kanasha.chess.models.notation.MoveNotation
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
 
 object MovementUtils {
 
-    fun Pair<Int, Int>.isOnBoard(board: IBoard){
+    fun SquareCoordinate.isOnBoard(board: IBoard){
         val boardSize = 0..board.size-1
-        if(this.first !in boardSize || this.second !in boardSize){
+        if(this.x !in boardSize || this.y !in boardSize){
             throw MovementException()
         }
     }
 
-    fun Pair<Int, Int>.hasPieceOnCoordinate(board: IBoard): Boolean {
-        val squarePiece = board.getSquare(this.first, this.second).piece
+    fun SquareCoordinate.hasPieceOnCoordinate(board: IBoard): Boolean {
+        val squarePiece = board.getSquare(this.x, this.y).piece
         return squarePiece != null
     }
 
-    fun List<MoveNotation>.containsCoordinate(coordinate: Pair<Int, Int>){
+    fun List<MoveNotation>.containsCoordinate(coordinate: SquareCoordinate){
         if(this.any { it.coordinate == coordinate}){
             throw MovementException()
         }

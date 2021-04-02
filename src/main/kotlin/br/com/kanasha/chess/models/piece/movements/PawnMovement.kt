@@ -1,6 +1,7 @@
 package br.com.kanasha.chess.models.piece.movements
 
 import br.com.kanasha.chess.models.board.IBoard
+import br.com.kanasha.chess.models.board.square.SquareCoordinate
 import br.com.kanasha.chess.models.notation.ChessNotationRead.toNotationPGN
 import br.com.kanasha.chess.models.notation.MoveNotation
 import br.com.kanasha.chess.models.piece.IPieceSpecial
@@ -15,16 +16,16 @@ class PawnMovement(private val piece: IPieceSpecial): IPieceMovement {
     override fun calculateAllowedCoordinates(board: IBoard): List<MoveNotation> {
         val possibleCoordinates = mutableListOf<MoveNotation>()
         val currentCoordinate = board.getPieceCoordinate(piece)
-        val isAvailableSquare = possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first + (1 * piece.color.factorSide.first), currentCoordinate.second + (1 * piece.color.factorSide.second)))
+        val isAvailableSquare = possibleCoordinates.addAvailableSquare(board, SquareCoordinate(currentCoordinate.x + (1 * piece.color.factorSide.x), currentCoordinate.y + (1 * piece.color.factorSide.y)))
         if(piece.isFirstMove && isAvailableSquare){
-            possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first + (2 * piece.color.factorSide.first), currentCoordinate.second + (2 * piece.color.factorSide.second)))
+            possibleCoordinates.addAvailableSquare(board, SquareCoordinate(currentCoordinate.x + (2 * piece.color.factorSide.x), currentCoordinate.y + (2 * piece.color.factorSide.y)))
         }
-        possibleCoordinates.addAttackSquare(board, Pair(currentCoordinate.first + 1, currentCoordinate.second + (1 * piece.color.factorSide.second)))
-        possibleCoordinates.addAttackSquare(board, Pair(currentCoordinate.first - 1, currentCoordinate.second + (1 * piece.color.factorSide.second)))
+        possibleCoordinates.addAttackSquare(board, SquareCoordinate(currentCoordinate.x + 1, currentCoordinate.y + (1 * piece.color.factorSide.y)))
+        possibleCoordinates.addAttackSquare(board, SquareCoordinate(currentCoordinate.x - 1, currentCoordinate.y + (1 * piece.color.factorSide.y)))
         return possibleCoordinates
     }
 
-    private fun MutableList<MoveNotation>.addAvailableSquare(board: IBoard, coordinate: Pair<Int, Int>): Boolean {
+    private fun MutableList<MoveNotation>.addAvailableSquare(board: IBoard, coordinate: SquareCoordinate): Boolean {
         return try {
             coordinate.isOnBoard(board)
             if(coordinate.hasPieceOnCoordinate(board)){
@@ -43,10 +44,10 @@ class PawnMovement(private val piece: IPieceSpecial): IPieceMovement {
         }
     }
 
-    private fun MutableList<MoveNotation>.addAttackSquare(board: IBoard, coordinate: Pair<Int, Int>): Boolean {
+    private fun MutableList<MoveNotation>.addAttackSquare(board: IBoard, coordinate: SquareCoordinate): Boolean {
         try{
             coordinate.isOnBoard(board)
-            val square = board.getSquare(coordinate.first, coordinate.second)
+            val square = board.getSquare(coordinate.x, coordinate.y)
             val targetPiece = square.piece
             if(board.colorRound != piece.color){
                 square.isUnderEnemyAttack = true
@@ -71,8 +72,8 @@ class PawnMovement(private val piece: IPieceSpecial): IPieceMovement {
     override fun doMovement(board: IBoard, stringNotation: String){
         val pieceCoordinate = board.getPieceCoordinate(piece)
         val movementNotation = piece.allowedMoves.find { it.notation == stringNotation }!!
-        board.squares[pieceCoordinate.first][pieceCoordinate.second].piece = null
-        board.squares[movementNotation.coordinate.first][movementNotation.coordinate.second].piece?.isDead = true
-        board.squares[movementNotation.coordinate.first][movementNotation.coordinate.second].piece = piece
+        board.squares[pieceCoordinate.x][pieceCoordinate.y].piece = null
+        board.squares[movementNotation.coordinate.x][movementNotation.coordinate.y].piece?.isDead = true
+        board.squares[movementNotation.coordinate.x][movementNotation.coordinate.y].piece = piece
     }
 }

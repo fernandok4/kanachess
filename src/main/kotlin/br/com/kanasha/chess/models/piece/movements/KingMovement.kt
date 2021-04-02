@@ -1,6 +1,7 @@
 package br.com.kanasha.chess.models.piece.movements
 
 import br.com.kanasha.chess.models.board.IBoard
+import br.com.kanasha.chess.models.board.square.SquareCoordinate
 import br.com.kanasha.chess.models.notation.ChessNotationRead.toNotationPGN
 import br.com.kanasha.chess.models.notation.MoveNotation
 import br.com.kanasha.chess.models.piece.IPiece
@@ -20,10 +21,10 @@ class KingMovement(private val piece: IPiece): IPieceMovement {
         return possibleCoordinates
     }
 
-    private fun MutableList<MoveNotation>.addAvailableSquare(board: IBoard, coordinate: Pair<Int, Int>) {
+    private fun MutableList<MoveNotation>.addAvailableSquare(board: IBoard, coordinate: SquareCoordinate) {
         try {
             coordinate.isOnBoard(board)
-            val square = board.getSquare(coordinate.first, coordinate.second)
+            val square = board.getSquare(coordinate.x, coordinate.y)
             val targetPiece = square.piece
             if(board.colorRound != piece.color){
                 square.isUnderEnemyAttack = true
@@ -49,19 +50,19 @@ class KingMovement(private val piece: IPiece): IPieceMovement {
         }
     }
 
-    private fun Pair<Int, Int>.getArroundSquares() = listOf(Pair(this.first + 1, this.second + 1),
-        Pair(this.first + 1, this.second - 1),
-        Pair(this.first - 1, this.second + 1),
-        Pair(this.first - 1, this.second - 1),
-        Pair(this.first, this.second + 1),
-        Pair(this.first, this.second - 1),
-        Pair(this.first - 1, this.second),
-        Pair(this.first + 1, this.second))
+    private fun SquareCoordinate.getArroundSquares() = listOf(SquareCoordinate(this.x + 1, this.y + 1),
+        SquareCoordinate(this.x + 1, this.y - 1),
+        SquareCoordinate(this.x - 1, this.y + 1),
+        SquareCoordinate(this.x - 1, this.y - 1),
+        SquareCoordinate(this.x, this.y + 1),
+        SquareCoordinate(this.x, this.y - 1),
+        SquareCoordinate(this.x - 1, this.y),
+        SquareCoordinate(this.x + 1, this.y))
 
-    private fun List<Pair<Int, Int>>.hasOppositeEnemyKing(board: IBoard) = this.any {
+    private fun List<SquareCoordinate>.hasOppositeEnemyKing(board: IBoard) = this.any {
         try{
             it.isOnBoard(board)
-            val squarePiece = board.getSquare(it.first, it.second).piece
+            val squarePiece = board.getSquare(it.x, it.y).piece
             squarePiece is King && squarePiece.color != piece.color
         }catch (e: MovementException){
             false
@@ -71,8 +72,8 @@ class KingMovement(private val piece: IPiece): IPieceMovement {
     override fun doMovement(board: IBoard, stringNotation: String){
         val pieceCoordinate = board.getPieceCoordinate(piece)
         val movementNotation = piece.allowedMoves.find { it.notation == stringNotation }!!
-        board.squares[pieceCoordinate.first][pieceCoordinate.second].piece = null
-        board.squares[movementNotation.coordinate.first][movementNotation.coordinate.second].piece?.isDead = true
-        board.squares[movementNotation.coordinate.first][movementNotation.coordinate.second].piece = piece
+        board.squares[pieceCoordinate.x][pieceCoordinate.y].piece = null
+        board.squares[movementNotation.coordinate.x][movementNotation.coordinate.y].piece?.isDead = true
+        board.squares[movementNotation.coordinate.x][movementNotation.coordinate.y].piece = piece
     }
 }

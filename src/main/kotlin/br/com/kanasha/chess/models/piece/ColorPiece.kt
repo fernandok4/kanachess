@@ -1,5 +1,7 @@
 package br.com.kanasha.chess.models.piece
 
-enum class ColorPiece(val factorSide: Pair<Int, Int>) {
-    BLACK(Pair(0, -1)), WHITE(Pair(0, 1));
+import br.com.kanasha.chess.models.board.square.SquareCoordinate
+
+enum class ColorPiece(val factorSide: SquareCoordinate) {
+    BLACK(SquareCoordinate(0, -1)), WHITE(SquareCoordinate(0, 1));
 }

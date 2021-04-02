@@ -1,6 +1,7 @@
 package br.com.kanasha.chess.models.piece.movements
 
 import br.com.kanasha.chess.models.board.IBoard
+import br.com.kanasha.chess.models.board.square.SquareCoordinate
 import br.com.kanasha.chess.models.notation.ChessNotationRead.toNotationPGN
 import br.com.kanasha.chess.models.notation.MoveNotation
 import br.com.kanasha.chess.models.piece.IPiece
@@ -14,21 +15,21 @@ class KnightMovement(private val piece: IPiece): IPieceMovement {
     override fun calculateAllowedCoordinates(board: IBoard): List<MoveNotation> {
         val possibleCoordinates = mutableListOf<MoveNotation>()
         val currentCoordinate = board.getPieceCoordinate(piece)
-        possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first + 2, currentCoordinate.second + 1))
-        possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first + 2, currentCoordinate.second - 1))
-        possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first - 2, currentCoordinate.second + 1))
-        possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first - 2, currentCoordinate.second - 1))
-        possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first + 1, currentCoordinate.second + 2))
-        possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first + 1, currentCoordinate.second - 2))
-        possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first - 1, currentCoordinate.second + 2))
-        possibleCoordinates.addAvailableSquare(board, Pair(currentCoordinate.first - 1, currentCoordinate.second - 2))
+        possibleCoordinates.addAvailableSquare(board, SquareCoordinate(currentCoordinate.x + 2, currentCoordinate.y + 1))
+        possibleCoordinates.addAvailableSquare(board, SquareCoordinate(currentCoordinate.x + 2, currentCoordinate.y - 1))
+        possibleCoordinates.addAvailableSquare(board, SquareCoordinate(currentCoordinate.x - 2, currentCoordinate.y + 1))
+        possibleCoordinates.addAvailableSquare(board, SquareCoordinate(currentCoordinate.x - 2, currentCoordinate.y - 1))
+        possibleCoordinates.addAvailableSquare(board, SquareCoordinate(currentCoordinate.x + 1, currentCoordinate.y + 2))
+        possibleCoordinates.addAvailableSquare(board, SquareCoordinate(currentCoordinate.x + 1, currentCoordinate.y - 2))
+        possibleCoordinates.addAvailableSquare(board, SquareCoordinate(currentCoordinate.x - 1, currentCoordinate.y + 2))
+        possibleCoordinates.addAvailableSquare(board, SquareCoordinate(currentCoordinate.x - 1, currentCoordinate.y - 2))
         return possibleCoordinates
     }
 
-    private fun MutableList<MoveNotation>.addAvailableSquare(board: IBoard, coordinate: Pair<Int, Int>): Boolean {
+    private fun MutableList<MoveNotation>.addAvailableSquare(board: IBoard, coordinate: SquareCoordinate): Boolean {
         try {
             coordinate.isOnBoard(board)
-            val square = board.getSquare(coordinate.first, coordinate.second)
+            val square = board.getSquare(coordinate.x, coordinate.y)
             val targetPiece = square.piece
             if(board.colorRound != piece.color){
                 square.isUnderEnemyAttack = true
@@ -50,8 +51,8 @@ class KnightMovement(private val piece: IPiece): IPieceMovement {
     override fun doMovement(board: IBoard, stringNotation: String){
         val pieceCoordinate = board.getPieceCoordinate(piece)
         val movementNotation = piece.allowedMoves.find { it.notation == stringNotation }!!
-        board.squares[pieceCoordinate.first][pieceCoordinate.second].piece = null
-        board.squares[movementNotation.coordinate.first][movementNotation.coordinate.second].piece?.isDead = true
-        board.squares[movementNotation.coordinate.first][movementNotation.coordinate.second].piece = piece
+        board.squares[pieceCoordinate.x][pieceCoordinate.y].piece = null
+        board.squares[movementNotation.coordinate.x][movementNotation.coordinate.y].piece?.isDead = true
+        board.squares[movementNotation.coordinate.x][movementNotation.coordinate.y].piece = piece
     }
 }
