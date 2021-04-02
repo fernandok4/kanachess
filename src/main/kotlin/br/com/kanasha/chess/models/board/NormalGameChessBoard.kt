@@ -1,5 +1,6 @@
 package br.com.kanasha.chess.models.board
 
+import br.com.kanasha.chess.gson.exclusionStrategy.Exclude
 import br.com.kanasha.chess.models.board.square.Square
 import br.com.kanasha.chess.models.piece.*
 
@@ -9,6 +10,7 @@ class NormalGameChessBoard: IBoard {
     override var colorRound = ColorPiece.WHITE
     override var squares = Array(size, { Array(size, { Square() }) })
 
+    @delegate:Transient
     override val allPieces by lazy {
         squares.fold(mutableListOf<IPiece>()){ acc, square ->
             square.forEach {
@@ -19,6 +21,7 @@ class NormalGameChessBoard: IBoard {
             acc
         }
     }
+    @delegate:Transient
     override val piecesGroupedByColor by lazy {
         allPieces.groupBy { it.color }
     }

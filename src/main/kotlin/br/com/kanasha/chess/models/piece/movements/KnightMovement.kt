@@ -1,5 +1,6 @@
 package br.com.kanasha.chess.models.piece.movements
 
+import br.com.kanasha.chess.gson.exclusionStrategy.Exclude
 import br.com.kanasha.chess.models.board.IBoard
 import br.com.kanasha.chess.models.board.square.SquareCoordinate
 import br.com.kanasha.chess.models.notation.ChessNotationRead.toNotationPGN
@@ -10,7 +11,7 @@ import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.containsC
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.isOnBoard
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.targetAvailableSquare
 
-class KnightMovement(private val piece: IPiece): IPieceMovement {
+class KnightMovement(@field:Exclude private val piece: IPiece): IPieceMovement {
 
     override fun calculateAllowedCoordinates(board: IBoard): List<MoveNotation> {
         val possibleCoordinates = mutableListOf<MoveNotation>()

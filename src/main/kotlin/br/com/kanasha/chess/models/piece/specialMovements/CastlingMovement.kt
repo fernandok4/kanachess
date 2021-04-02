@@ -1,5 +1,6 @@
 package br.com.kanasha.chess.models.piece.specialMovements
 
+import br.com.kanasha.chess.gson.exclusionStrategy.Exclude
 import br.com.kanasha.chess.models.board.IBoard
 import br.com.kanasha.chess.models.board.square.SquareCoordinate
 import br.com.kanasha.chess.models.notation.ChessNotationRead.toNotationPGN
@@ -9,7 +10,7 @@ import br.com.kanasha.chess.models.piece.Rook
 import br.com.kanasha.chess.models.piece.movements.IPieceMovement
 import java.lang.Exception
 
-class CastlingMovement(private val piece: IPieceSpecial): IPieceMovement {
+class CastlingMovement(@field:Exclude private val piece: IPieceSpecial): IPieceMovement {
 
     override fun calculateAllowedCoordinates(board: IBoard): List<MoveNotation> {
         if(!piece.isFirstMove){
