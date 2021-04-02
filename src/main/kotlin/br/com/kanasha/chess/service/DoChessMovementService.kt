@@ -2,7 +2,6 @@ package br.com.kanasha.chess.service
 
 import br.com.kanasha.chess.engine.ProcessNormalChessBoardEngine
 import br.com.kanasha.chess.models.board.IBoard
-import br.com.kanasha.chess.models.piece.ColorPiece
 
 class DoChessMovementService(private val board: IBoard, private val moveNotation: String) {
 
