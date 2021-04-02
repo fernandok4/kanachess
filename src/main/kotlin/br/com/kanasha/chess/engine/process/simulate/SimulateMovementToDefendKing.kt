@@ -9,7 +9,7 @@ class SimulateMovementToDefendKing(private val board: IBoard,
                                    private val pieceToDefend: IPiece,
                                    private val possibleCoordanate: Pair<Int, Int>): ChessProcess {
     override fun execute(): Boolean {
-        val initialCoordanate = board.getPieceCoordenate(pieceToDefend)
+        val initialCoordanate = board.getPieceCoordinate(pieceToDefend)
         board.squares[initialCoordanate.first][initialCoordanate.second].piece = null
         board.squares[possibleCoordanate.first][possibleCoordanate.second].piece = pieceToDefend
         AvailablePieceCoordinatesProcess(board, board.allPieces).execute()

@@ -18,7 +18,7 @@ class KnightMovementTest {
         val expectedMoveNotations = listOf("Nf3", "Nh3")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedMoveNotations))
     }
@@ -38,7 +38,7 @@ class KnightMovementTest {
         val expectedMoveNotations = listOf("Ng1", "Nh4", "Nd4", "Ng5", "Nxe5")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedMoveNotations))
     }

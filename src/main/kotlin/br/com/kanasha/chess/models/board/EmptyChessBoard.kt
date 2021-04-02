@@ -25,4 +25,13 @@ class EmptyChessBoard: IBoard {
     override fun resetBoard(){
         squares = Array(8, { Array(8, { Square() }) })
     }
+
+    override fun nextTurn(){
+        squares.forEach {
+            it.forEach {
+                it.isUnderEnemyAttack = false
+            }
+        }
+        colorRound = if(colorRound == ColorPiece.WHITE) ColorPiece.BLACK else ColorPiece.WHITE
+    }
 }

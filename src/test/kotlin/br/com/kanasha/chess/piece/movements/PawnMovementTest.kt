@@ -20,7 +20,7 @@ class PawnMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(expectedMoveNotations))
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(expectedMoveNotations))
     }
 
     @Test
@@ -56,7 +56,7 @@ class PawnMovementTest {
         val expectedMoveNotations = listOf("e5", "exd5")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedMoveNotations))
     }
@@ -84,7 +84,7 @@ class PawnMovementTest {
         val expectedMoveNotations = listOf("e5", "exd5")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedMoveNotations))
     }

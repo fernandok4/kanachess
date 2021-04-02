@@ -1,6 +1,7 @@
 package br.com.kanasha.chess.models.piece.movements.utils
 
 import br.com.kanasha.chess.models.board.IBoard
+import br.com.kanasha.chess.models.notation.MoveNotation
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
 
@@ -18,8 +19,8 @@ object MovementUtils {
         return squarePiece != null
     }
 
-    fun List<Pair<Int, Int>>.containsCoordinate(coordinate: Pair<Int, Int>){
-        if(this.contains(coordinate)){
+    fun List<MoveNotation>.containsCoordinate(coordinate: Pair<Int, Int>){
+        if(this.any { it.coordinate == coordinate}){
             throw MovementException()
         }
     }

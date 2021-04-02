@@ -13,7 +13,7 @@ interface IBoard {
 
     fun resetBoard()
     fun getSquare(x: Int, y: Int): Square = squares[x][y]
-    fun getPieceCoordenate(piece: IPiece): Pair<Int, Int> {
+    fun getPieceCoordinate(piece: IPiece): Pair<Int, Int> {
         var yCoordinate = -1
         var xCoordinate = -1
         for((xIndex, squares) in this.squares.withIndex()){
@@ -25,4 +25,5 @@ interface IBoard {
         }
         return Pair(xCoordinate, yCoordinate)
     }
+    fun nextTurn()
 }

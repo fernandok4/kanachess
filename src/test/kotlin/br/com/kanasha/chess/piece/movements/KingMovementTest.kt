@@ -3,6 +3,7 @@ package br.com.kanasha.chess.piece.movements
 import br.com.kanasha.chess.engine.ProcessNormalChessBoardEngine
 import br.com.kanasha.chess.models.board.EmptyChessBoard
 import br.com.kanasha.chess.models.board.NormalGameChessBoard
+import br.com.kanasha.chess.models.board.square.Square
 import br.com.kanasha.chess.models.piece.ColorPiece
 import br.com.kanasha.chess.models.piece.King
 import br.com.kanasha.chess.models.piece.Pawn
@@ -19,7 +20,7 @@ class KingMovementTest {
         val piece = board.squares[4][0].piece!!
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.isEmpty())
     }
@@ -39,7 +40,7 @@ class KingMovementTest {
         val expectedMoveNotations = listOf("Ke2")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedMoveNotations))
     }
@@ -52,7 +53,7 @@ class KingMovementTest {
         val expectedNotations = listOf("Ke5", "Kf5", "Kf4", "Kf3", "Ke3", "Kd4", "Kd5", "Kd3")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedNotations))
     }
@@ -66,7 +67,7 @@ class KingMovementTest {
         val expectedNotations = listOf("Kxe5", "Kf5", "Kf3", "Ke3", "Kd5", "Kd3")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedNotations))
     }
@@ -80,7 +81,7 @@ class KingMovementTest {
         val expectedNotations = listOf("Kf4", "Kf3", "Ke3", "Kd4", "Kd3")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedNotations))
     }
@@ -95,7 +96,7 @@ class KingMovementTest {
         val expectedNotations = listOf("Kf5", "Kf3", "Ke3", "Kd5", "Kd3")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedNotations) && !allowedMovements.contains("Kxe5"))
     }
@@ -110,8 +111,22 @@ class KingMovementTest {
         val expectedNotationsNotContains = listOf("Kf3", "Kf4", "Kf5")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedNotations) && !allowedMovements.any { expectedNotationsNotContains.contains(it) })
+    }
+
+    @Test
+    fun testKingMovementOnEmptyBoardToTwoSides(){
+        val board = EmptyChessBoard()
+        board.resetBoard()
+        board.squares[4][0] = Square(King(ColorPiece.WHITE))
+        val piece = board.squares[4][0].piece!!
+        val expectedMoveNotations = listOf("Kf2", "Ke2", "Kd2", "Kd1", "Kf1")
+
+        ProcessNormalChessBoardEngine(board).process()
+        val allowedMovements = piece.allowedMoves.map { it.notation }
+
+        Assertions.assertTrue(allowedMovements.containsAll(expectedMoveNotations))
     }
 }

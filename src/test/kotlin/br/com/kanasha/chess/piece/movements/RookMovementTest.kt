@@ -32,7 +32,7 @@ class RookMovementTest {
         val expectedNotations = listOf("Rb1", "Rc1", "Rd1", "Re1", "Rf1", "Rg1", "Rh1", "Ra2", "Ra3", "Ra4", "Ra5", "Ra6", "Ra7", "Ra8")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedNotations))
     }
@@ -46,7 +46,7 @@ class RookMovementTest {
         val expectedNotations = listOf("Rb1", "Rc1", "Rd1", "Re1", "Rxf1", "Ra2", "Ra3", "Ra4", "Ra5", "Ra6", "Ra7", "Ra8")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedNotations))
     }
@@ -60,7 +60,7 @@ class RookMovementTest {
         val expectedNotations = listOf("Rb1", "Rc1", "Rd1", "Re1", "Rf1", "Rg1", "Rh1", "Ra2", "Ra3", "Ra4", "Ra5", "Rxa6")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedNotations))
     }
@@ -75,7 +75,7 @@ class RookMovementTest {
         val expectedNotations = listOf("Rb1", "Rc1", "Rd1", "Re1", "Rxf1", "Ra2", "Ra3", "Ra4", "Ra5", "Rxa6")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedNotations))
     }
@@ -90,7 +90,7 @@ class RookMovementTest {
         val expectedNotations = listOf("Rb1", "Rc1", "Rd1", "Re1", "Ra2", "Ra3", "Ra4")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expectedNotations))
     }
@@ -105,7 +105,7 @@ class RookMovementTest {
         val expecetedNotations = listOf("Rb1", "Rc1", "Rd1", "Re1", "Ra1xf1", "Ra2", "Ra3", "Ra4", "Ra5", "Ra6", "Ra7", "Ra8")
 
         ProcessNormalChessBoardEngine(board).process()
-        val allowedMovements = piece.allowedMoves.map { it.moveNotation }
+        val allowedMovements = piece.allowedMoves.map { it.notation }
 
         Assertions.assertTrue(allowedMovements.containsAll(expecetedNotations))
     }

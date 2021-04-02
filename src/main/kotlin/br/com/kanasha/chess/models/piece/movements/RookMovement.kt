@@ -1,6 +1,8 @@
 package br.com.kanasha.chess.models.piece.movements
 
 import br.com.kanasha.chess.models.board.IBoard
+import br.com.kanasha.chess.models.notation.ChessNotationRead.toNotationPGN
+import br.com.kanasha.chess.models.notation.MoveNotation
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.containsCoordinate
@@ -9,9 +11,9 @@ import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.targetAva
 
 class RookMovement(private val piece: IPiece): IPieceMovement {
 
-    override fun calculateAllowedCoordinates(board: IBoard): List<Pair<Int, Int>> {
-        val possibleCoordinates = mutableListOf<Pair<Int, Int>>()
-        val currentCoordinate = board.getPieceCoordenate(piece)
+    override fun calculateAllowedCoordinates(board: IBoard): List<MoveNotation> {
+        val possibleCoordinates = mutableListOf<MoveNotation>()
+        val currentCoordinate = board.getPieceCoordinate(piece)
         possibleCoordinates.addAvailableSquare(board, currentCoordinate, 1, 0)
         possibleCoordinates.addAvailableSquare(board, currentCoordinate, -1, 0)
         possibleCoordinates.addAvailableSquare(board, currentCoordinate, 0, 1)
@@ -19,10 +21,10 @@ class RookMovement(private val piece: IPiece): IPieceMovement {
         return possibleCoordinates
     }
 
-    fun MutableList<Pair<Int, Int>>.addAvailableSquare(board: IBoard, coordinate: Pair<Int, Int>, xSquares: Int, ySquares: Int) {
+    private fun MutableList<MoveNotation>.addAvailableSquare(board: IBoard, coordinate: Pair<Int, Int>, xSquares: Int, ySquares: Int) {
         try{
             coordinate.isOnBoard(board)
-            if(board.getPieceCoordenate(piece).equals(coordinate)){
+            if(board.getPieceCoordinate(piece) == coordinate){
                 this.addAvailableSquare(board, Pair(coordinate.first + xSquares, coordinate.second + ySquares), xSquares, ySquares)
                 return
             }
@@ -33,7 +35,11 @@ class RookMovement(private val piece: IPiece): IPieceMovement {
             }
             this.containsCoordinate(coordinate)
             piece.targetAvailableSquare(targetPiece)
-            this.add(coordinate)
+            this.add(MoveNotation(
+                coordinate.toNotationPGN(board, piece),
+                coordinate,
+                RookMovement::class
+            ))
             if(targetPiece != null){
                 return
             }
@@ -41,5 +47,13 @@ class RookMovement(private val piece: IPiece): IPieceMovement {
         } catch (e: MovementException){
             return
         }
+    }
+
+    override fun doMovement(board: IBoard, stringNotation: String){
+        val pieceCoordinate = board.getPieceCoordinate(piece)
+        val movementNotation = piece.allowedMoves.find { it.notation == stringNotation }!!
+        board.squares[pieceCoordinate.first][pieceCoordinate.second].piece = null
+        board.squares[movementNotation.coordinate.first][movementNotation.coordinate.second].piece?.isDead = true
+        board.squares[movementNotation.coordinate.first][movementNotation.coordinate.second].piece = piece
     }
 }

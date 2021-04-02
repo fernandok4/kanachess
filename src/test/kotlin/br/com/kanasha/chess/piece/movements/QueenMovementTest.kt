@@ -32,7 +32,7 @@ class QueenMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Qb2", "Qa3", "Qd2", "Qe3", "Qf4", "Qg5", "Qh6")
         ))
     }
@@ -47,7 +47,7 @@ class QueenMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Qb2", "Qa3", "Qd2", "Qe3", "Qxf4")
         ))
     }
@@ -63,7 +63,7 @@ class QueenMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Qb2", "Qxa3", "Qd2", "Qe3", "Qxf4")
         ))
     }
@@ -78,7 +78,7 @@ class QueenMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Qb2", "Qa3", "Qd2", "Qe3")
         ))
     }
@@ -94,7 +94,7 @@ class QueenMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Qd2", "Qe3")
         ))
     }
@@ -121,7 +121,7 @@ class QueenMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Qb1", "Qc1", "Qd1", "Qe1", "Qf1", "Qg1", "Qh1", "Qa2", "Qa3", "Qa4", "Qa5", "Qa6", "Qa7", "Qa8")
         ))
     }
@@ -136,7 +136,7 @@ class QueenMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Qb1", "Qc1", "Qd1", "Qe1", "Qxf1", "Qa2", "Qa3", "Qa4", "Qa5", "Qa6", "Qa7", "Qa8")
         ))
     }
@@ -151,7 +151,7 @@ class QueenMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Qb1", "Qc1", "Qd1", "Qe1", "Qf1", "Qg1", "Qh1", "Qa2", "Qa3", "Qa4", "Qa5", "Qxa6")
         ))
     }
@@ -167,7 +167,7 @@ class QueenMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Qb1", "Qc1", "Qd1", "Qe1", "Qxf1", "Qa2", "Qa3", "Qa4", "Qa5", "Qxa6")
         ))
     }
@@ -183,7 +183,7 @@ class QueenMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Qb1", "Qc1", "Qd1", "Qe1", "Qa2", "Qa3", "Qa4")
         ))
     }
@@ -199,7 +199,7 @@ class QueenMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Qb1", "Qc1", "Qd1", "Qe1", "Qa1xf1", "Qa2", "Qa3", "Qa4", "Qa5", "Qa6", "Qa7", "Qa1a8")
         ))
     }

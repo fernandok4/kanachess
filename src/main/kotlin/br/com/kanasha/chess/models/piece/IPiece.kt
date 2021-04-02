@@ -1,14 +1,14 @@
 package br.com.kanasha.chess.models.piece
 
-import br.com.kanasha.chess.models.board.square.SquareCoordanate
+import br.com.kanasha.chess.models.notation.MoveNotation
 import br.com.kanasha.chess.models.piece.movements.IPieceMovement
 
 interface IPiece {
 
-    val cdPiece: String                          // Código da peça de acordo com PGN
+    val cdPiece: kotlin.String                          // Código da peça de acordo com PGN
     val color: ColorPiece
     val pieceMovementTypes: List<IPieceMovement> // Tipos de movimentos das peças
-    var allowedMoves: List<SquareCoordanate>           // Coordenadas disponiveis para atacar mas em formato PGN
+    var allowedMoves: List<MoveNotation>           // Coordenadas disponiveis para atacar mas em formato PGN
     var isUnderProtection: Boolean
     var isUnderAttack: Boolean
     var isDead: Boolean

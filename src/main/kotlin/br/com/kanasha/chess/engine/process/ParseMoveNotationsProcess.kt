@@ -7,7 +7,7 @@ class ParseMoveNotationsProcess(private val board: IBoard): ChessProcess {
     override fun execute(): Boolean {
         board.allPieces.filter { !it.isDead }.forEach { piece ->
             piece.allowedMoves.forEach {
-                it.moveNotation = it.coordanate.toNotationPGN(board, piece)
+                it.notation = it.coordinate.toNotationPGN(board, piece)
             }
         }
         return true

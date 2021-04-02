@@ -33,7 +33,7 @@ class BishopMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Bb2", "Ba3", "Bd2", "Be3", "Bf4", "Bg5", "Bh6")
         ))
     }
@@ -48,7 +48,7 @@ class BishopMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Bb2", "Ba3", "Bd2", "Be3", "Bxf4")
         ))
     }
@@ -64,7 +64,7 @@ class BishopMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Bb2", "Bxa3", "Bd2", "Be3", "Bxf4")
         ))
     }
@@ -79,7 +79,7 @@ class BishopMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Bb2", "Ba3", "Bd2", "Be3")
         ))
     }
@@ -95,7 +95,7 @@ class BishopMovementTest {
         ProcessNormalChessBoardEngine(board).process()
         val allowedMovements = piece.allowedMoves
 
-        Assertions.assertTrue(allowedMovements.map { it.moveNotation }.containsAll(
+        Assertions.assertTrue(allowedMovements.map { it.notation }.containsAll(
             listOf("Bd2", "Be3")
         ))
     }

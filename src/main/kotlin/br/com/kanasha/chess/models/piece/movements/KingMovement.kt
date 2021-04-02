@@ -1,6 +1,8 @@
 package br.com.kanasha.chess.models.piece.movements
 
 import br.com.kanasha.chess.models.board.IBoard
+import br.com.kanasha.chess.models.notation.ChessNotationRead.toNotationPGN
+import br.com.kanasha.chess.models.notation.MoveNotation
 import br.com.kanasha.chess.models.piece.IPiece
 import br.com.kanasha.chess.models.piece.King
 import br.com.kanasha.chess.models.piece.movements.exceptions.MovementException
@@ -9,16 +11,16 @@ import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.isOnBoard
 import br.com.kanasha.chess.models.piece.movements.utils.MovementUtils.targetAvailableSquare
 
 class KingMovement(private val piece: IPiece): IPieceMovement {
-    override fun calculateAllowedCoordinates(board: IBoard): List<Pair<Int, Int>> {
-        val possibleCoordinates = mutableListOf<Pair<Int, Int>>()
-        val currentCoordinate = board.getPieceCoordenate(piece)
+    override fun calculateAllowedCoordinates(board: IBoard): List<MoveNotation> {
+        val possibleCoordinates = mutableListOf<MoveNotation>()
+        val currentCoordinate = board.getPieceCoordinate(piece)
         currentCoordinate.getArroundSquares().forEach {
             possibleCoordinates.addAvailableSquare(board, it)
         }
         return possibleCoordinates
     }
 
-    fun MutableList<Pair<Int, Int>>.addAvailableSquare(board: IBoard, coordinate: Pair<Int, Int>) {
+    private fun MutableList<MoveNotation>.addAvailableSquare(board: IBoard, coordinate: Pair<Int, Int>) {
         try {
             coordinate.isOnBoard(board)
             val square = board.getSquare(coordinate.first, coordinate.second)
@@ -28,20 +30,26 @@ class KingMovement(private val piece: IPiece): IPieceMovement {
             }
             piece.targetAvailableSquare(targetPiece)
             this.containsCoordinate(coordinate)
-            if(square.isUnderEnemyAttack || targetPiece?.isUnderProtection ?: false){
+            if(square.isUnderEnemyAttack || targetPiece?.isUnderProtection == true){
                 return
             }
             val hasOppositeEnemyKing = coordinate.getArroundSquares().hasOppositeEnemyKing(board)
             if(hasOppositeEnemyKing){
                 return
             }
-            this.add(coordinate)
+            this.add(
+                MoveNotation(
+                    coordinate.toNotationPGN(board, piece),
+                    coordinate,
+                    KingMovement::class
+                )
+            )
         } catch (e: MovementException){
             return
         }
     }
 
-    fun Pair<Int, Int>.getArroundSquares() = listOf(Pair(this.first + 1, this.second + 1),
+    private fun Pair<Int, Int>.getArroundSquares() = listOf(Pair(this.first + 1, this.second + 1),
         Pair(this.first + 1, this.second - 1),
         Pair(this.first - 1, this.second + 1),
         Pair(this.first - 1, this.second - 1),
@@ -50,8 +58,21 @@ class KingMovement(private val piece: IPiece): IPieceMovement {
         Pair(this.first - 1, this.second),
         Pair(this.first + 1, this.second))
 
-    fun List<Pair<Int, Int>>.hasOppositeEnemyKing(board: IBoard) = this.any {
-        val squarePiece = board.getSquare(it.first, it.second).piece
-        squarePiece is King && squarePiece.color != piece.color
+    private fun List<Pair<Int, Int>>.hasOppositeEnemyKing(board: IBoard) = this.any {
+        try{
+            it.isOnBoard(board)
+            val squarePiece = board.getSquare(it.first, it.second).piece
+            squarePiece is King && squarePiece.color != piece.color
+        }catch (e: MovementException){
+            false
+        }
+    }
+
+    override fun doMovement(board: IBoard, stringNotation: String){
+        val pieceCoordinate = board.getPieceCoordinate(piece)
+        val movementNotation = piece.allowedMoves.find { it.notation == stringNotation }!!
+        board.squares[pieceCoordinate.first][pieceCoordinate.second].piece = null
+        board.squares[movementNotation.coordinate.first][movementNotation.coordinate.second].piece?.isDead = true
+        board.squares[movementNotation.coordinate.first][movementNotation.coordinate.second].piece = piece
     }
 }

@@ -61,4 +61,13 @@ class NormalGameChessBoard: IBoard {
         squares[3][1].piece = Pawn(ColorPiece.WHITE)
         squares[4][1].piece = Pawn(ColorPiece.WHITE)
     }
+
+    override fun nextTurn(){
+        squares.forEach {
+            it.forEach {
+                it.isUnderEnemyAttack = false
+            }
+        }
+        colorRound = if(colorRound == ColorPiece.WHITE) ColorPiece.BLACK else ColorPiece.WHITE
+    }
 }
